@@ -19,6 +19,7 @@
 \newcommand{\Heis}{\mathrm{Heis}_3}
 \newcommand{\Zq}{\mathbb{Z}/q\mathbb{Z}}
 \newcommand{\sigc}{\sigma_c}
+\newcommand{\sigci}[1]{\sigma_{c_{#1}}}
 \newcommand{\sigtri}{\sigma_{\mathrm{tri}}}
 \newcommand{\dc}{\delta_c}
 \newcommand{\dtri}{\delta_{\mathrm{tri}}}
@@ -40,7 +41,8 @@ Independent Researcher, Paris, France\\
   \maketitle
 
   \begin{abstract}
-    We report numerical evidence for Hypothesis~$\Hcolor$ (colour triplet
+    We report numerical evidence for Hypothesis~$\Hcolor$
+    (colour triplet
     co-admissibility) on the Heisenberg group $\Heis(\Zq)$,
     the key open condition in the derivation of $\mathrm{SU}(3)$ as the
     admissible gauge group of the colour sector~\cite{Beau2026a35}.
@@ -180,13 +182,13 @@ Independent Researcher, Paris, France\\
 
     \textbf{Triplet capacity:}
     \[
-      \sigtri(n) = \sigc_{1}(n) \cdot \sigc_{2}(n) \cdot \sigc_{3}(n).
+      \sigtri(n) = \sigci{1}(n) \cdot \sigci{2}(n) \cdot \sigci{3}(n).
     \]
 
     \textbf{Inter-triplet variance ratio:}
     \[
-      R_{\mathrm{var}}(n) = \frac{\mathrm{Var}_i\bigl(\sigc_i(n)\bigr)}
-      {\langle \sigc_i(n)^2 \rangle},
+      R_{\mathrm{var}}(n) = \frac{\mathrm{Var}_i\bigl(\sigci{i}(n)\bigr)}
+      {\langle \sigci{i}(n)^2 \rangle},
     \]
     where the average is over the three elements of the triplet.
     Under exact $\Hcolor$, $R_{\mathrm{var}}(n) = 0$; in practice it
@@ -202,7 +204,7 @@ Independent Researcher, Paris, France\\
     \textbf{Colour covariance:}
     \[
       C_{\mathrm{color}} = \mathrm{Cov}\bigl(
-      \sigc_1(n), \sigc_2(n), \sigc_3(n)\bigr)_{n \in [n_0, n_1]}
+      \sigci{1}(n), \sigci{2}(n), \sigci{3}(n)\bigr)_{n \in [n_0, n_1]}
       \in \mathrm{End}(\Vcolor) \cong \mathbb{R}^{3 \times 3}.
     \]
     Under exact $\Hcolor$, the three profiles are identical and
@@ -241,7 +243,8 @@ Independent Researcher, Paris, France\\
 
   \subsection{Pipeline parameters}
 
-    All computations use \texttt{o32\_triplet\_pipeline.py} built on the
+    All computations use \texttt{o32\_triplet\_pipeline.py},
+    built on the
     \texttt{spectral\_O12.py} BFS/Gram--Schmidt engine.
     Parameters follow O25~\cite{Beau2026a28} exactly:
 
@@ -403,7 +406,7 @@ Independent Researcher, Paris, France\\
 
     In all cases, two eigenvalues are at or below numerical precision
     ($\lesssim 10^{-5}$), confirming rank~1.
-    Rank~1 means the three $\sigc_i(n)$ profiles are co-linear: they differ
+    Rank~1 means the three $\sigci{i}(n)$ profiles are co-linear: they differ
     at most by an amplitude factor, not by shape.
     This is the sharpest numerical expression of co-admissibility available
     at finite $M$.
@@ -430,12 +433,82 @@ Independent Researcher, Paris, France\\
   \subsection{Additive exponent structure}
 
     The agreement $\dtri \approx 3\dc$ at sub-percent level for $q=151$
-    confirms the multiplicative factorisation $\sigtri = \sigc_1 \cdot
-  \sigc_2 \cdot \sigc_3$ implies additive exponents.
+    confirms the multiplicative factorisation $\sigtri = \sigci{1} \cdot
+  \sigci{2} \cdot \sigci{3}$ implies additive exponents.
     This is the triplet analogue of the O25 pair relation
     $\delta_{\mathrm{pair}} = \delta_c + \delta_{q-c}$~\cite{Beau2026a28}.
     It is consistent with the three sectors being statistically independent
     copies of the same Weil capacity process — the content of $\Hcolor$.
+
+  \subsection{Physical interpretation: individual sectors as colour charges}
+
+    The confirmation of $\Hcolor$ has a direct physical reading.
+    Each element $c_i$ of a valid triplet belongs simultaneously to:
+    \begin{itemize}
+      \item a conjugate pair $\{c_i, q-c_i\}$, which carries a
+      spin-$\frac{1}{2}$ Weil-trajectory space $V_\rho \cong \mathbb{C}^2$
+      (O29~\cite{Beau2026a33}, $d_\rho = 2$);
+      \item a colour triplet $\{c_1, c_2, c_3\}$, whose admissibility fixed
+      point is $\mathrm{SU}(3)$ under $\Hcolor$~\cite{Beau2026a35}.
+    \end{itemize}
+    An individual sector $c_i$ therefore carries simultaneously spin-$\frac{1}{2}$
+    and one colour charge: the minimal quantum-number content of a quark.
+    The confirmation of $\Hcolor$ is thus a necessary step toward identifying
+    individual admissible sectors as colour-charge carriers, and colour triplets
+    as the pre-image structure of colour-neutral baryons.
+
+    This identification is strengthened by condition~(T3): the sum-zero constraint
+    $c_1 + c_2 + c_3 \equiv 0 \pmod{q}$, derived from the $\mathbb{Z}_3$ orbit
+    structure, is the discrete analogue of the baryon colour-neutrality condition
+    $r + g + b = 0$.
+    It is not imposed by hand but follows from the Born--Infeld admissibility
+    of the triplet orbit.
+
+    We stress that this identification provides the quantum numbers of colour
+    charges, not a full derivation of quarks as stable projected configurations.
+    The construction of quark-like fermionic sectors as admissible configurations
+    in $\mathrm{Im}\,\Pi$ carrying these quantum numbers is a separate programme
+    deferred to future work.
+
+  \subsection{Recursive non-injectivity and structural confinement}
+
+    The projection
+    $\Pi_{\mathrm{colour}} :
+    \{\text{coloured sectors } c_i\} \to
+    \{\text{colour-neutral pairs and triplets}\}$
+    maps three coloured degrees of freedom to one colour-neutral observable.
+    By the recursive non-injectivity theorem (ENI~\cite{Beau2026l},
+    Corollary~6), this projection must be non-injective whenever colour-neutral
+    objects arise as genuinely emergent from coloured sectors.
+    The non-injectivity entropy $S_{\Pi_{\mathrm{colour}}} > 0$ measures the
+    colour information erased by the projection.
+
+    This is the structural content of colour confinement: individual colour charges
+    are not directly observable because $\Pi_{\mathrm{colour}}$ is non-injective by
+    construction.
+    The present paper confirms that the three sectors $c_i$ of a valid triplet have
+    identical admissibility profiles --- they are structurally indistinguishable at
+    the level of $\sigma_{c_i}(n)$ --- which is precisely the condition under which
+    $\Pi_{\mathrm{colour}}$ produces a well-defined colour-neutral emergent object.
+
+    The tower of non-injective projections identified in ENI §5 takes the following
+    explicit form in the Cosmochrony framework:
+    \begin{equation}
+      \Omega_0
+      \;\xrightarrow{\Pi_1}\;
+      \{\text{sectors } c_i\}
+      \;\xrightarrow{\Pi_{\mathrm{colour}}}\;
+      \{\text{triplets}\}
+      \;\xrightarrow{\Pi_3}\;
+      \{\text{hadrons}\},
+      \label{eq:tower}
+    \end{equation}
+    where each arrow is non-injective by ENI Corollary~6.
+    The confirmation of $\Hcolor$ validates the co-admissibility structure
+    at the second level of the tower~\eqref{eq:tower}: the three sectors of a
+    triplet project to a single colour-neutral effective object, with the
+    $\mathrm{SU}(3)$ gauge structure arising as the symmetry group of the
+    projection's fibre.
 
   \subsection{Comparison with conjugate-pair co-admissibility}
 
@@ -445,6 +518,10 @@ Independent Researcher, Paris, France\\
     The triplet variance ratio $R_{\mathrm{var}}$ being of the same order
     (and its convergence to zero with $q$) places colour triplets in the
     same universality class as conjugate pairs for co-admissibility.
+    This is consistent with the tower~\eqref{eq:tower}: conjugate pairs
+    correspond to the lepton level (colour-neutral, $\Pi_{\mathrm{colour}}$
+    is trivial), while colour triplets correspond to the baryon level
+    ($\Pi_{\mathrm{colour}}$ is non-trivial and is what O32 tests).
 
   \subsection{Anomaly filter}
 
