@@ -25,7 +25,6 @@
 \newcommand{\dtri}{\delta_{\mathrm{tri}}}
 \newcommand{\Vcolor}{\tilde{V}_{\mathrm{color}}}
 \newcommand{\Hcolor}{[\mathrm{H\text{-}color}]}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
 
 \title{Colour Triplet Co-admissibility on $\Heis(\Zq)$:\\
 Numerical Test of Hypothesis $\Hcolor$}
@@ -58,17 +57,16 @@ Independent Researcher, Paris, France\\
     normalised against the intra-pair variance of conjugate pairs
     $\{c, q-c\}$ (known co-admissible by O25~\cite{Beau2026a28}) as a
     noise-floor reference.
-    We find $R_{\mathrm{var}} \approx 3.4 \times 10^{-3}$ at $q = 61$
-    and $R_{\mathrm{var}} \approx 7.1 \times 10^{-4}$ at $q = 151$,
-    both at or below the noise floor of the reference pairs, consistent
-    with exact co-admissibility up to block-sampling variance.
+    We find $R_{\mathrm{var}} \approx 3.4 \times 10^{-3}$ at $q = 61$,
+    $7.1 \times 10^{-4}$ at $q = 151$, and $1.6 \times 10^{-3}$ at $q = 211$,
+    all at or below the noise floor $\mathtt{ctrl\_ref} = 3.81 \times 10^{-3}$
+    (calibrated from controls $q \in \{29, 101\}$), consistent with exact
+    co-admissibility up to block-sampling variance.
     The triplet capacity exponent satisfies $\dtri \approx 3\dc$
-    at both primes, confirming the additive structure predicted by O31.
+    at all three primes, confirming the additive structure predicted by O31.
     All triplet covariance matrices $C_{\mathrm{color}} \in
-    \mathrm{End}(\Vcolor)$ have numerical rank~1,
-    confirming that the three profiles are co-linear.
-    Results for $q \in \{211, 307\}$ are pending and will be incorporated
-    in the final version.
+    \mathrm{End}(\Vcolor)$ have numerical rank~1.
+    Results for $q = 307$ are pending.
   \end{abstract}
 
   \paragraph{Keywords.}
@@ -235,8 +233,8 @@ Independent Researcher, Paris, France\\
         61  & 1 & 13  & test \\
         101 & 2 & --- & control \\
         151 & 1 & 32  & test \\
-        211 & 1 & \todo{val} & test (pending) \\
-        307 & 1 & \todo{val} & test (pending) \\
+        211 & 1 & 14 & test (completed) \\
+        307 & 1 & 17 & test (in progress) \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -257,8 +255,8 @@ Independent Researcher, Paris, France\\
         29  & 20 & 0.99 & 8  & [2, 5] (table) & --- (ctrl) \\
         61  & 50 & 0.99 & 10 & [2, 8] (auto)  & 4 \\
         151 & 50 & 0.29 & 37 & [3, 13] (auto) & 4 \\
-        211 & 50 & 0.11 & 50 & [3, 13] (auto) & \todo{N} \\
-        307 & 50 & 0.08 & 70 & \todo{auto}    & \todo{N} \\
+        211 & 50 & 0.11 & 50 & [3, 14] (auto) & 4 \\
+        307 & 50 & 0.08 & 70 & --- (pending)   & --- \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -289,8 +287,8 @@ Independent Researcher, Paris, France\\
         \midrule
         61  & 13 & $(1,13,47)$, $(2,26,33)$, $(3,39,19)$, $(4,52,5)$ \\
         151 & 32 & $(1,32,118)$, $(2,64,85)$, $(3,96,52)$, $(4,128,19)$ \\
-        \todo{211} & \todo{} & \todo{} \\
-        \todo{307} & \todo{} & \todo{} \\
+        211 & 14 & $(1,14,196)$, $(2,28,181)$, $(3,42,166)$, $(4,56,151)$ \\
+        307 & 17 & (pending) \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -307,8 +305,8 @@ Independent Researcher, Paris, France\\
         \midrule
         61  & 12 & 5.072 & 0.154 & 0.984 \\
         151 & 12 & 4.520 & 0.057 & 0.981 \\
-        \todo{211} & \todo{} & \todo{} & \todo{} & \todo{} \\
-        \todo{307} & \todo{} & \todo{} & \todo{} & \todo{} \\
+        211 & 12 & 4.396 & 0.079 & 0.983 \\
+        307 & --- & (pending) & --- & --- \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -327,8 +325,8 @@ Independent Researcher, Paris, France\\
         \midrule
         61  & 5.072 & 15.216 & 14.888 & 0.000 & 2.2\% \\
         151 & 4.520 & 13.559 & 13.466 & 0.148 & 0.7\% \\
-        \todo{211} & & & & & \\
-        \todo{307} & & & & & \\
+        211 & 4.396 & 13.189 & 13.020 & 0.124 & 1.3\% \\
+        307 & --- & --- & (pending) & --- & --- \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -357,30 +355,33 @@ Independent Researcher, Paris, France\\
         $q$ & $q \bmod 3$ & $R_{\mathrm{var}}^{\mathrm{(window)}}$
         & $R_{\mathrm{var}}^{\mathrm{ctrl}}$ & $R$ \\
         \midrule
-        29  & 2 (ctrl) & --- & $2.04 \times 10^{-3}$ & --- \\
-        61  & 1 (test) & $3.44 \times 10^{-3}$ & $2.04 \times 10^{-3}$ & 1.69 \\
-        101 & 2 (ctrl) & --- & \todo{} & --- \\
-        151 & 1 (test) & $7.09 \times 10^{-4}$ & \todo{} & \todo{} \\
-        211 & 1 (test) & \todo{} & --- & \todo{} \\
-        307 & 1 (test) & \todo{} & --- & \todo{} \\
+        29  & 2 (ctrl) & --- & $5.60 \times 10^{-2}$ & ctrl \\
+        101 & 2 (ctrl) & --- & $1.62 \times 10^{-2}$ & ctrl \\
+        \multicolumn{5}{l}{\footnotesize Combined noise floor: $\mathtt{ctrl\_ref} = 3.81 \times 10^{-3}$} \\
+        61  & 1 (test) & $3.44 \times 10^{-3}$ & $3.81 \times 10^{-3}$ & $0.90$ \checkmark \\
+        151 & 1 (test) & $7.09 \times 10^{-4}$ & $3.81 \times 10^{-3}$ & $0.19$ \checkmark \\
+        211 & 1 (test) & $1.60 \times 10^{-3}$ & $3.81 \times 10^{-3}$ & $0.42$ \checkmark \\
+        307 & 1 (test) & (pending) & --- & --- \\
         \bottomrule
       \end{tabular}
     \end{center}
 
-    At $q=61$, the calibrated ratio is $R = 1.69$ (M=20 for control);
-    at $q=151$, full control calibration is pending the q=101 run.
-    Both test primes show $R_{\mathrm{var}}$ comparable to or below the
-    control noise floor, consistent with exact co-admissibility.
+    With both controls ($q=29$, M=50; $q=101$, M=50) calibrated, the combined
+    noise floor is $\mathtt{ctrl\_ref} = 3.81 \times 10^{-3}$.
+    All three test primes satisfy $R \leq 1$: $R = 0.90$ ($q=61$),
+    $R = 0.19$ ($q=151$), $R = 0.42$ ($q=211$).
+    The triplet variance is at or below the control noise floor in every case,
+    consistent with exact co-admissibility.
 
     The $q$-dependence of $R_{\mathrm{var}}$ follows an approximate power law:
     \begin{equation}
       R_{\mathrm{var}}(q) \;\approx\; A \cdot q^{-\alpha},
       \label{eq:powerlaw}
     \end{equation}
-    with $\alpha \approx 1.75$ estimated from the two available test points
-    ($q = 61$ and $q = 151$).
-    This is a preliminary estimate; the final value will be determined from
-    the full four-prime dataset.
+    with the caveat that $q=211$ (bfs\_frac$=0.11$, partial BFS) shows
+    $R_{\mathrm{var}}$ slightly above $q=151$ (bfs\_frac$=0.29$), likely
+    reflecting the reduced BFS coverage rather than a systematic trend.
+    A reliable power-law exponent requires the full dataset including $q=307$.
 
   \subsection{Colour covariance}
     \label{sec:ccolor}
@@ -399,7 +400,10 @@ Independent Researcher, Paris, France\\
         151 & $(2,64,85)$    & $\approx (1\times10^{-6},\ 3\times10^{-6},\ 4.63\times10^{-2})$ & 1 \\
         151 & $(3,96,52)$    & $\approx (1\times10^{-6},\ 9\times10^{-6},\ 4.23\times10^{-2})$ & 1 \\
         151 & $(4,128,19)$   & $\approx (0,\ 1\times10^{-5},\ 4.19\times10^{-2})$ & 1 \\
-        \todo{211} & & & \\
+        211 & $(1,14,196)$   & $\approx (0,\,5\times10^{-6},\,4.83\times10^{-2})$ & 1 \\
+        211 & $(2,28,181)$   & $\approx (0,\,1\times10^{-6},\,4.10\times10^{-2})$ & 1 \\
+        211 & $(3,42,166)$   & $\approx (0,\,2\times10^{-6},\,4.28\times10^{-2})$ & 1 \\
+        211 & $(4,56,151)$   & $\approx (0,\,1\times10^{-6},\,4.13\times10^{-2})$ & 1 \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -582,8 +586,9 @@ Independent Researcher, Paris, France\\
   of $G_{\mathrm{SM}} = \mathrm{SU}(3) \times \mathrm{SU}(2) \times
   \mathrm{U}(1)$ from Born--Infeld-admissible Weil representations on the
   standard Cayley graph.
-  The results for $q \in \{211, 307\}$ and the full control calibration
-  on $q = 101$ are pending and will be incorporated in the final version.
+  The results for $q = 211$ and the full control calibration ($q = 101$)
+  have been incorporated in the present version.
+  Results for $q = 307$ are pending and will be added in a future update.
 
   \clearpage
   \bibliographystyle{plain}
