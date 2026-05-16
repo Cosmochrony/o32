@@ -108,6 +108,12 @@ Independent Researcher, Paris, France\\
   colour-adapted Cayley graph (generating set $S_q^{(3)}$) and
   conditionally on $\Hcolor$ for the standard generating set
   $S_q = \{X^{\pm 1}, Y^{\pm 1}\}$.
+  O31~v2 additionally establishes (i)~the exact generator-twist isospectrality
+  $\operatorname{spec}(\rho_c(P_{S_q})) = \operatorname{spec}(\rho_c(P_{\phi_\omega(S_q)}))$
+  for all $c$, and (ii)~that this does \emph{not} imply
+  $\operatorname{spec}(\rho_c(P_{S_q})) = \operatorname{spec}(\rho_{\omega c}(P_{S_q}))$,
+  closing the spectral approach to $\Hcolor$ on the standard graph
+  (Section~\ref{sec:discussion}).
   The present paper provides the numerical test of $\Hcolor$ on the
   standard graph.
 
@@ -430,9 +436,20 @@ Independent Researcher, Paris, France\\
 
     We classify the current status of $\Hcolor$ as:
     \textbf{numerically supported, not yet analytically proved.}
-    A proof would require establishing that the BFS saturation structure is
-    $\mathbb{Z}_3$-symmetric on $\Heis(\Zq)$ for all $q \equiv 1 \pmod{3}$,
-    which is an open problem in Hecke spectral theory on Heisenberg groups.
+    A proof requires establishing that the BFS saturation structure is
+    $\mathbb{Z}_3$-symmetric on $\Heis(\Zq)$ for all $q \equiv 1 \pmod{3}$.
+    O31~v2~\cite{Beau2026a35} identifies a structural obstruction to the most
+    natural proof strategy: while the Weil-sector Markov operator satisfies the
+    exact generator-twist isospectrality
+    $\operatorname{spec}(\rho_c(P_{S_q})) = \operatorname{spec}(\rho_c(P_{\phi_\omega(S_q)}))$
+    for every $c$ (Theorem~4.x of O31~v2, confirmed numerically for all
+    $q \equiv 1 \pmod{3}$, $q \leq 157$), the spectra of $\rho_c(P_{S_q})$ and
+    $\rho_{\omega c}(P_{S_q})$ are generically \emph{distinct} (max $|\Delta\lambda|
+  \approx 0.3$--$0.4$, same order as non-triplet pairs).
+    Consequently, $\Hcolor$ on the standard graph cannot be derived from global
+    Markov-spectrum equality: the BFS capacity $\sigma_c(n)$ is a strictly finer
+    observable, and any analytical approach must act directly on the rank structure
+    of the BFS walk (Gram matrices, cyclic envelopes, or saturation profiles).
 
   \subsection{Additive exponent structure}
 
@@ -546,10 +563,15 @@ Independent Researcher, Paris, France\\
 
     \begin{enumerate}
       \item \textbf{Analytical proof of $\Hcolor$:}
-      The numerical evidence is consistent with an exact symmetry, but
-      the proof requires showing that the $\mathbb{Z}_3$ orbit structure
-      of the triplet is reflected in the BFS saturation structure.
-      This is the primary open problem identified in O31~\cite{Beau2026a35}.
+      The numerical evidence is consistent with an exact symmetry, but the
+      proof must address the BFS capacity directly.
+      O31~v2~\cite{Beau2026a35} establishes that the approach via global
+      Markov-spectrum equality is closed: $\operatorname{spec}(\rho_c(P_{S_q}))
+      \neq \operatorname{spec}(\rho_{\omega c}(P_{S_q}))$ in general, so the
+      $\mathbb{Z}_3$ co-admissibility of $\sigma_c(n)$ is not a consequence
+      of spectral equality of the sectorial Markov operators.
+      Open directions include Gram-matrix rigidity, cyclic-envelope geometry,
+      and saturation-profile universality.
       \item \textbf{Yang--Mills for $\mathrm{SU}(3)$:}
       Establishing the effective gauge dynamics on the colour fibre,
       analogous to Q6a~\cite{Beau2026m} for $\mathrm{SU}(2)$.
