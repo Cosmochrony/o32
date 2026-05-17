@@ -53,15 +53,21 @@ the discrete analogue of baryon colour-neutrality.
   spectrum equality; BFS capacity is a strictly finer observable.
 - **Physical interpretation**: co-admissible sectors carry spin-1/2 + one colour charge
   (quark structure); triplets are colour-neutral baryon pre-images.
+- **Analytical sharpening (v1.3+, Proposition)**: for block-averaged capacity profiles,
+  E[sigma_c(n)] = E[sigma_{omega*c}(n)] + O(q^{-1}) is proved analytically
+  (Prop. avg-hcolor). This establishes H_color_eff (equality of capacity exponents) in the
+  q -> infinity limit. The finite-q R_var decrease is the predicted modulation bias
+  with expected scaling R_var ~ q^{-1}.
 
 ## Status
 
-[H-color] is **numerically supported, not yet analytically proved**.
-q=307 computation in progress.
+[H-color] is **numerically supported** for q in {151, 211} and analytically established
+in expectation (H_color_eff) via Proposition avg-hcolor. A pointwise analytical proof
+for fixed finite q remains open. q=307 computation in progress.
 
 ## DOI
 
-https://doi.org/10.5281/zenodo.20241446
+https://doi.org/10.5281/zenodo.20259893
 
 ## Compilation
 
