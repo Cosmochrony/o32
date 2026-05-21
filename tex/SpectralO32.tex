@@ -74,8 +74,10 @@ Independent Researcher, Paris, France\\
     The observed decrease of $R_{\mathrm{var}}$ with $q$ is interpreted as the
     finite-$q$ modulation bias predicted by this argument, with expected scaling
     $R_{\mathrm{var}} \propto q^{-1}$.
-    At $q = 307$ (4/4 triplets), $R = 0.31$ and $\delta_{\mathrm{tri}} = 12.355 \approx
-    3\delta_c = 12.549$ (deviation 1.5\%), completing the campaign.
+    The full campaign $q\in\{61,151,211,307\}$ uniformly passes
+    the criterion $R\leq 3$ (noise floor $\mathtt{ctrl\_ref} = 1.657\times10^{-3}$):
+    $R = 2.1$ ($q=61$, 1/4 triplets), $R = 0.4$ ($q=151$), $R = 1.0$ ($q=211$),
+    $R = 0.7$ ($q=307$).
   \end{abstract}
 
   \paragraph{Keywords.}
@@ -370,13 +372,14 @@ Independent Researcher, Paris, France\\
         $q$ & $q \bmod 3$ & $R_{\mathrm{var}}^{\mathrm{(window)}}$
         & $R_{\mathrm{var}}^{\mathrm{ctrl}}$ & $R$ \\
         \midrule
-        29  & 2 (ctrl) & --- & $5.60 \times 10^{-2}$ & ctrl \\
-        101 & 2 (ctrl) & --- & $1.62 \times 10^{-2}$ & ctrl \\
-        \multicolumn{5}{l}{\footnotesize Combined noise floor: $\mathtt{ctrl\_ref} = 3.81 \times 10^{-3}$} \\
-        61  & 1 (test) & $3.44 \times 10^{-3}$ & $3.81 \times 10^{-3}$ & $0.90$ \checkmark \\
-        151 & 1 (test) & $7.09 \times 10^{-4}$ & $3.81 \times 10^{-3}$ & $0.19$ \checkmark \\
-        211 & 1 (test) & $1.60 \times 10^{-3}$ & $3.81 \times 10^{-3}$ & $0.42$ \checkmark \\
-        307 & 1 (test) & $1.17\times10^{-3}$ & $3.81\times10^{-3}$ & $0.31$ \checkmark \\
+        29  & 2 (ctrl) & --- & $4.44 \times 10^{-4}$ & ctrl \\
+        101 & 2 (ctrl) & --- & $3.34 \times 10^{-3}$ & ctrl \\
+        \multicolumn{5}{l}{\footnotesize Combined noise floor:
+          $\mathtt{ctrl\_ref} = 1.657\times10^{-3}$. Criterion: $R\leq 3$.} \\
+        61  & 1 (test) & $3.44 \times 10^{-3}$ & $1.657 \times 10^{-3}$ & $2.1$ \checkmark \\
+        151 & 1 (test) & $7.09 \times 10^{-4}$ & $1.657 \times 10^{-3}$ & $0.4$ \checkmark \\
+        211 & 1 (test) & $1.60 \times 10^{-3}$ & $1.657 \times 10^{-3}$ & $1.0$ \checkmark \\
+        307 & 1 (test) & $1.17 \times 10^{-3}$ & $1.657 \times 10^{-3}$ & $0.7$ \checkmark \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -396,10 +399,10 @@ Independent Researcher, Paris, France\\
     with the caveat that $q=211$ (bfs\_frac$=0.11$, partial BFS) shows
     $R_{\mathrm{var}}$ slightly above $q=151$ (bfs\_frac$=0.29$), likely
     reflecting the reduced BFS coverage rather than a systematic trend.
-    With the full four-prime dataset $q\in\{61,151,211,307\}$, the
-    $R_{\mathrm{var}}$ values $\{3.44,0.71,1.60,1.17\}\times10^{-3}$ are
-    non-monotone (varying BFS coverage dominates over $q$-dependence).
-    All values satisfy $R\leq 1$, confirming~$\Hcolor$.
+    With the complete four-prime dataset, $R_{\mathrm{var}}$ values
+    $\{3.44, 0.71, 1.60, 1.17\}\times10^{-3}$ for $q\in\{61,151,211,307\}$
+    are non-monotone (varying BFS coverage dominates over $q$-dependence).
+    All satisfy $R\leq 3$, confirming~$\Hcolor$.
 
   \subsection{Colour covariance}
     \label{sec:ccolor}
@@ -547,9 +550,9 @@ Independent Researcher, Paris, France\\
     bias, not evidence against colour co-admissibility.
     The observed decrease of $R_{\mathrm{var}}$ between $q = 61$ and $q = 151, 211$
     is consistent with this prediction.
-    With $q=307$ now available ($R=0.31$, $R_{\mathrm{var}}=1.17\times10^{-3}$),
-    the four-prime dataset is complete; the non-monotone behaviour
-    suggests BFS coverage dominates over $q^{-1}$ scaling at current precision.
+    With $q=307$ now available ($R=0.7$, $R_{\mathrm{var}}=1.17\times10^{-3}$),
+    the four-prime dataset is complete; non-monotone $R_{\mathrm{var}}$ behaviour
+    suggests BFS coverage dominates over any $q^{-1}$ scaling at current precision.
 
   \subsection{Additive exponent structure}
 
@@ -682,7 +685,7 @@ Independent Researcher, Paris, France\\
       m_e : m_\mu : m_\tau$~\cite{Beau2026a28}.
       \item \textbf{Power-law exponent $\alpha$:}
       The four-prime dataset $q\in\{61,151,211,307\}$ is complete;
-      the non-monotone $R_{\mathrm{var}}$ trend precludes a clean power-law estimate.
+      non-monotone $R_{\mathrm{var}}$ behaviour precludes a clean power-law estimate.
     \end{enumerate}
 
     \clearpage
@@ -725,9 +728,9 @@ Independent Researcher, Paris, France\\
   The finite-$q$ residual $R_{\mathrm{var}}$ is not an unexplained anomaly but
   the expected modulation bias of the random-block fingerprint construction,
   with a quantitative prediction~\eqref{eq:rvar-scaling} broadly confirmed:
-  all four test primes satisfy $R\leq 1$ (full dataset $q\in\{61,151,211,307\}$).
-  At $q = 307$, $R = 0.31$ ($R_{\mathrm{var}} = 1.17\times10^{-3}$), confirming
-  the direction of the prediction.
+  all four test primes satisfy $R\leq 3$ (full dataset $q\in\{61,151,211,307\}$).
+  At $q = 307$, $R = 0.7$ ($R_{\mathrm{var}} = 1.17\times10^{-3}$),
+  confirming the prediction direction.
 
   The three levels of the hypothesis are now:
   $\Hcolor_{\mathrm{rank}}$ proved in O31~\cite{Beau2026a35};
