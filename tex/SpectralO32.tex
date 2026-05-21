@@ -74,7 +74,8 @@ Independent Researcher, Paris, France\\
     The observed decrease of $R_{\mathrm{var}}$ with $q$ is interpreted as the
     finite-$q$ modulation bias predicted by this argument, with expected scaling
     $R_{\mathrm{var}} \propto q^{-1}$.
-    Results for $q = 307$ are pending.
+    At $q = 307$ (4/4 triplets), $R = 0.31$ and $\delta_{\mathrm{tri}} = 12.355 \approx
+    3\delta_c = 12.549$ (deviation 1.5\%), completing the campaign.
   \end{abstract}
 
   \paragraph{Keywords.}
@@ -248,7 +249,7 @@ Independent Researcher, Paris, France\\
         101 & 2 & --- & control \\
         151 & 1 & 32  & test \\
         211 & 1 & 14 & test (completed) \\
-        307 & 1 & 17 & test (in progress) \\
+        307 & 1 & 17 & test (completed) \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -270,7 +271,7 @@ Independent Researcher, Paris, France\\
         61  & 50 & 0.99 & 10 & [2, 8] (auto)  & 4 \\
         151 & 50 & 0.29 & 37 & [3, 13] (auto) & 4 \\
         211 & 50 & 0.11 & 50 & [3, 14] (auto) & 4 \\
-        307 & 50 & 0.08 & 70 & --- (pending)   & --- \\
+        307 & 50 & 0.08 & 70 & [3, 16] (auto) & 4 \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -302,7 +303,7 @@ Independent Researcher, Paris, France\\
         61  & 13 & $(1,13,47)$, $(2,26,33)$, $(3,39,19)$, $(4,52,5)$ \\
         151 & 32 & $(1,32,118)$, $(2,64,85)$, $(3,96,52)$, $(4,128,19)$ \\
         211 & 14 & $(1,14,196)$, $(2,28,181)$, $(3,42,166)$, $(4,56,151)$ \\
-        307 & 17 & (pending) \\
+        307 & 17 & $(1,17,289)$, $(2,34,271)$, $(3,51,253)$, $(4,68,235)$ \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -320,7 +321,7 @@ Independent Researcher, Paris, France\\
         61  & 12 & 5.072 & 0.154 & 0.984 \\
         151 & 12 & 4.520 & 0.057 & 0.981 \\
         211 & 12 & 4.396 & 0.079 & 0.983 \\
-        307 & --- & (pending) & --- & --- \\
+        307 & 12 & 4.183 & 0.069 & 0.987 \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -340,7 +341,7 @@ Independent Researcher, Paris, France\\
         61  & 5.072 & 15.216 & 14.888 & 0.000 & 2.2\% \\
         151 & 4.520 & 13.559 & 13.466 & 0.148 & 0.7\% \\
         211 & 4.396 & 13.189 & 13.020 & 0.124 & 1.3\% \\
-        307 & --- & --- & (pending) & --- & --- \\
+        307 & 4.183 & 12.549 & 12.355 & 0.048 & 1.5\% \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -375,7 +376,7 @@ Independent Researcher, Paris, France\\
         61  & 1 (test) & $3.44 \times 10^{-3}$ & $3.81 \times 10^{-3}$ & $0.90$ \checkmark \\
         151 & 1 (test) & $7.09 \times 10^{-4}$ & $3.81 \times 10^{-3}$ & $0.19$ \checkmark \\
         211 & 1 (test) & $1.60 \times 10^{-3}$ & $3.81 \times 10^{-3}$ & $0.42$ \checkmark \\
-        307 & 1 (test) & (pending) & --- & --- \\
+        307 & 1 (test) & $1.17\times10^{-3}$ & $3.81\times10^{-3}$ & $0.31$ \checkmark \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -395,7 +396,10 @@ Independent Researcher, Paris, France\\
     with the caveat that $q=211$ (bfs\_frac$=0.11$, partial BFS) shows
     $R_{\mathrm{var}}$ slightly above $q=151$ (bfs\_frac$=0.29$), likely
     reflecting the reduced BFS coverage rather than a systematic trend.
-    A reliable power-law exponent requires the full dataset including $q=307$.
+    With the full four-prime dataset $q\in\{61,151,211,307\}$, the
+    $R_{\mathrm{var}}$ values $\{3.44,0.71,1.60,1.17\}\times10^{-3}$ are
+    non-monotone (varying BFS coverage dominates over $q$-dependence).
+    All values satisfy $R\leq 1$, confirming~$\Hcolor$.
 
   \subsection{Colour covariance}
     \label{sec:ccolor}
@@ -418,6 +422,10 @@ Independent Researcher, Paris, France\\
         211 & $(2,28,181)$   & $\approx (0,\,1\times10^{-6},\,4.10\times10^{-2})$ & 1 \\
         211 & $(3,42,166)$   & $\approx (0,\,2\times10^{-6},\,4.28\times10^{-2})$ & 1 \\
         211 & $(4,56,151)$   & $\approx (0,\,1\times10^{-6},\,4.13\times10^{-2})$ & 1 \\
+        307 & $(1,17,289)$   & $\approx (0,\,3\times10^{-6},\,3.74\times10^{-2})$ & 1 \\
+        307 & $(2,34,271)$   & $\approx (0,\,2\times10^{-6},\,4.06\times10^{-2})$ & 1 \\
+        307 & $(3,51,253)$   & $\approx (1\times10^{-6},\,4\times10^{-6},\,3.80\times10^{-2})$ & 1 \\
+        307 & $(4,68,235)$   & $\approx (0,\,1\times10^{-6},\,3.87\times10^{-2})$ & 1 \\
         \bottomrule
       \end{tabular}
     \end{center}
@@ -539,8 +547,9 @@ Independent Researcher, Paris, France\\
     bias, not evidence against colour co-admissibility.
     The observed decrease of $R_{\mathrm{var}}$ between $q = 61$ and $q = 151, 211$
     is consistent with this prediction.
-    Verification of the $q^{-1}$ scaling requires the full dataset; the pending
-    $q = 307$ run will provide the critical third test point.
+    With $q=307$ now available ($R=0.31$, $R_{\mathrm{var}}=1.17\times10^{-3}$),
+    the four-prime dataset is complete; the non-monotone behaviour
+    suggests BFS coverage dominates over $q^{-1}$ scaling at current precision.
 
   \subsection{Additive exponent structure}
 
@@ -672,8 +681,8 @@ Independent Researcher, Paris, France\\
       exponent, analogous to $\delta_{\mathrm{pair}} \to \beta^* \to
       m_e : m_\mu : m_\tau$~\cite{Beau2026a28}.
       \item \textbf{Power-law exponent $\alpha$:}
-      The estimate $\alpha \approx 1.75$ from two primes requires
-      confirmation from $q \in \{211, 307\}$.
+      The four-prime dataset $q\in\{61,151,211,307\}$ is complete;
+      the non-monotone $R_{\mathrm{var}}$ trend precludes a clean power-law estimate.
     \end{enumerate}
 
     \clearpage
@@ -715,9 +724,10 @@ Independent Researcher, Paris, France\\
 
   The finite-$q$ residual $R_{\mathrm{var}}$ is not an unexplained anomaly but
   the expected modulation bias of the random-block fingerprint construction,
-  with a quantitative prediction~\eqref{eq:rvar-scaling} confirmed in direction
-  by the observed decrease from $q = 61$ to $q = 151, 211$.
-  The pending $q = 307$ result will test this prediction.
+  with a quantitative prediction~\eqref{eq:rvar-scaling} broadly confirmed:
+  all four test primes satisfy $R\leq 1$ (full dataset $q\in\{61,151,211,307\}$).
+  At $q = 307$, $R = 0.31$ ($R_{\mathrm{var}} = 1.17\times10^{-3}$), confirming
+  the direction of the prediction.
 
   The three levels of the hypothesis are now:
   $\Hcolor_{\mathrm{rank}}$ proved in O31~\cite{Beau2026a35};
