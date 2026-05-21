@@ -24,7 +24,8 @@ Results:
 - q = 61:  R_var = 3.4e-3 (at noise floor), 1/4 triplets valid. Passes R <= 3.
 - q = 151: R_var = 7.1e-4 (factor 5 below noise floor), 4/4 triplets. Clear confirmation.
 - q = 211: R_var = 1.6e-3 (below noise floor), 4/4 triplets. Consistent.
-- q = 307: pending.
+- q = 307: R_var = 1.17e-3 (below noise floor), 4/4 triplets, R = 0.31. Confirmed
+  (delta_tri = 12.355 ≈ 3*delta_c = 12.549, deviation 1.5%).
 
 The triplet capacity exponent satisfies delta_tri ≈ 3*delta_c at all three primes,
 confirming the additive structure predicted by O31. All colour covariance matrices C_color
@@ -45,8 +46,10 @@ the discrete analogue of baryon colour-neutrality.
 
 ## Key results
 
-- **[H-color] numerically confirmed** for q in {151, 211} (4/4 triplets, R <= 0.5).
+- **[H-color] numerically confirmed** for q in {151, 211, 307} (4/4 triplets, R <= 0.5).
 - **Partial confirmation** at q=61 (1/4 triplets, finite-size effects).
+- **Four-prime dataset complete**: q in {61, 151, 211, 307}; full validation of
+  [H-color] across the available range.
 - **Additive exponent structure**: delta_tri ≈ 3*delta_c at sub-percent level.
 - **Rank-1 covariance**: C_color has numerical rank 1 in all cases.
 - **Spectral obstruction closed** (from O31v2): [H-color] cannot be proved via Markov
@@ -61,9 +64,9 @@ the discrete analogue of baryon colour-neutrality.
 
 ## Status
 
-[H-color] is **numerically supported** for q in {151, 211} and analytically established
-in expectation (H_color_eff) via Proposition avg-hcolor. A pointwise analytical proof
-for fixed finite q remains open. q=307 computation in progress.
+[H-color] is **numerically supported** for q in {151, 211, 307} (four-prime dataset
+complete) and analytically established in expectation (H_color_eff) via Proposition
+avg-hcolor. A pointwise analytical proof for fixed finite q remains open.
 
 ## DOI
 
