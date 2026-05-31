@@ -71,6 +71,11 @@ Independent Researcher, Paris, France\\
     analytically (Proposition~\ref{prop:avg-hcolor}), establishing
     $\Hcolor_{\mathrm{eff}}$ (equality of capacity exponents) in the
     $q \to \infty$ limit.
+    The companion paper O31~\cite{Beau2026a35} further shows that each fingerprint
+    vector is a single additive character, so the full-block orbit dilation
+    $k \mapsto \omega k$ makes $\Hcolor$ exact pointwise at finite $q$; the residual
+    $R_{\mathrm{var}}$ reported here is the finite-sample footprint of independent
+    auxiliary draws rather than a breaking of co-admissibility.
     The observed decrease of $R_{\mathrm{var}}$ with $q$ is interpreted as the
     finite-$q$ modulation bias predicted by this argument, with expected scaling
     $R_{\mathrm{var}} \propto q^{-1}$.
@@ -452,13 +457,13 @@ Independent Researcher, Paris, France\\
     consistent with convergence.
 
     The status of $\Hcolor$ can now be sharpened beyond purely numerical support.
-    The pointwise equality $\sigma_c(n) = \sigma_{\omega c}(n) = \sigma_{\omega^2 c}(n)$
-    at fixed $q$, fixed block sample, and fixed shell is not the analytically natural
-    object: it is a finite-$M$, finite-$q$ statement sensitive to block-sampling
-    fluctuations.
-    The analytically relevant object is the block-averaged profile, and for this
-    observable the colour symmetry holds in expectation up to a controlled finite-$q$
-    correction, as the following argument establishes.
+    With auxiliary characters drawn independently for $c$, $\omega c$, $\omega^2 c$, the pointwise
+    equality $\sigma_c(n) = \sigma_{\omega c}(n) = \sigma_{\omega^2 c}(n)$ at fixed $q$ and fixed
+    shell is sensitive to block-sampling fluctuations; the analytically relevant object for this
+    sampling protocol is the block-averaged profile, for which the colour symmetry holds in
+    expectation up to a controlled finite-$q$ correction, as the following argument establishes.
+    Under the full-block orbit action, by contrast, the equality is exact at finite $q$
+    (Remark~\ref{rmk:exact-coscale}).
 
     \begin{proposition}[Averaged colour co-admissibility]
       \label{prop:avg-hcolor}
@@ -511,9 +516,29 @@ Independent Researcher, Paris, France\\
       contributes $O(q^{-1})$ to the capacity profile.
     \end{proposition}
 
+    \begin{remark}[Exact pointwise equality under the full-block orbit action]
+      \label{rmk:exact-coscale}
+      The $O(q^{-1})$ correction in Proposition~\ref{prop:avg-hcolor} arises only because the
+      auxiliary characters $c_2, c_3$ are drawn independently for $c$ and for $\omega c$.
+      If instead the whole block is acted on by the orbit dilation
+      $(c, c_2, c_3) \mapsto (\omega c, \omega c_2, \omega c_3)$, then by~\eqref{eq:fingerprint-modulation}
+      every modulation frequency transforms as $k \mapsto \omega k$, for all generator paths, not only
+      those with $B_2 = B_3 = 0$.
+      Since $k \mapsto \omega k$ is a bijection of $\Zq$, it preserves the number of distinct
+      frequencies at every shell, so
+      $\sigma_c(n) = \sigma_{\omega c}(n) = \sigma_{\omega^2 c}(n)$ holds \emph{exactly} at finite $q$,
+      with no averaging.
+      This is $\Hcolor_{\mathrm{pointwise}}$ under the orbit action; it is proved in
+      O31~\cite{Beau2026a35} (single-frequency structure of the fingerprint and the dilation unitary
+      $U_\omega$).
+      The residual $R_{\mathrm{var}}$ measured here reflects the independent-auxiliary sampling of the
+      present campaign, not a finite-$q$ breaking of co-admissibility.
+    \end{remark}
+
     We therefore distinguish three levels of the colour hypothesis.
-    $\Hcolor_{\mathrm{pointwise}}$ asserts exact equality of the finite-$q$,
-    finite-$M$ profiles; this is a numerical statement tested by $R_{\mathrm{var}}$.
+    $\Hcolor_{\mathrm{pointwise}}$ asserts exact equality of the finite-$q$ profiles; under the
+    full-block orbit action it holds exactly (Remark~\ref{rmk:exact-coscale}), while the
+    independent-auxiliary version is the finite-$M$ statement probed by $R_{\mathrm{var}}$.
     $\Hcolor_{\mathrm{avg}}$ asserts equality of the block-averaged profiles up
     to the $O(q^{-1})$ modulation correction; this is established analytically
     by Proposition~\ref{prop:avg-hcolor}.
@@ -524,10 +549,13 @@ Independent Researcher, Paris, France\\
 
     The condition required for the asymptotic $\mathrm{SU}(3)$ identification
     is $\Hcolor_{\mathrm{eff}}$, which is now analytically established.
-    What remains numerical is $\Hcolor_{\mathrm{pointwise}}$: the finite-$q$,
-    finite-$M$ residual variance $R_{\mathrm{var}}$, which is precisely the
-    quantity measured by the present campaign and predicted by the modulation
-    argument to scale as $R_{\mathrm{var}}(q) \propto q^{-1}$
+    Under the orbit action on the full block, $\Hcolor_{\mathrm{pointwise}}$ holds
+    exactly at finite $q$ (Remark~\ref{rmk:exact-coscale}, proved in
+    O31~\cite{Beau2026a35}).
+    The residual variance $R_{\mathrm{var}}$ measured here probes the
+    independent-auxiliary version of the finite-$q$, finite-$M$ profiles, which
+    is precisely the quantity measured by the present campaign and predicted by
+    the modulation argument to scale as $R_{\mathrm{var}}(q) \propto q^{-1}$
     (Section~\ref{ssec:residual-scaling}).
 
   \subsection{Scaling of the residual variance}
@@ -665,17 +693,6 @@ Independent Researcher, Paris, France\\
   \subsection{Open problems}
 
     \begin{enumerate}
-      \item \textbf{Connecting the algebraic and fingerprint levels of $\Hcolor$:}
-      Proposition~\ref{prop:avg-hcolor} establishes $\Hcolor_{\mathrm{avg}}$
-      analytically, and O31~\cite{Beau2026a35} proves exact sector rank
-      equality $r_c(n) = r_{\omega c}(n)$ at the algebraic level
-      (Lemma~4.x, Vandermonde symmetry).
-      The remaining open question is to connect these two levels: the algebraic
-      rank equality concerns the span of BFS vectors in the combined block space,
-      while the fingerprint observable involves Hadamard products of Weil vectors.
-      A direct analytical bridge between the two would upgrade
-      $\Hcolor_{\mathrm{avg}}$ from ``equality in expectation up to $O(q^{-1})$''
-      to an exact statement at finite $q$ for each block.
       \item \textbf{Yang--Mills for $\mathrm{SU}(3)$:}
       Establishing the effective gauge dynamics on the colour fibre,
       analogous to Q6a~\cite{Beau2026m} for $\mathrm{SU}(2)$.
@@ -721,9 +738,12 @@ Independent Researcher, Paris, France\\
   $\delta_c = \delta_{\omega c} = \delta_{\omega^2 c}$
   in the $q \to \infty$ limit.
   The $\mathrm{SU}(3)$ identification on the standard Cayley graph is therefore
-  analytically established at the level of the effective exponents;
-  the remaining numerical task is to verify the residual variance scaling
-  $R_{\mathrm{var}}(q) \propto q^{-1}$ as larger primes become available.
+  analytically established: at the level of the effective exponents via
+  Proposition~\ref{prop:avg-hcolor}, and pointwise at finite $q$ via the
+  full-block orbit action (Remark~\ref{rmk:exact-coscale}, O31~\cite{Beau2026a35}).
+  The residual variance $R_{\mathrm{var}}$ measured here is the
+  independent-auxiliary sampling footprint, predicted to scale as
+  $R_{\mathrm{var}}(q) \propto q^{-1}$.
 
   The finite-$q$ residual $R_{\mathrm{var}}$ is not an unexplained anomaly but
   the expected modulation bias of the random-block fingerprint construction,
@@ -736,8 +756,10 @@ Independent Researcher, Paris, France\\
   $\Hcolor_{\mathrm{rank}}$ proved in O31~\cite{Beau2026a35};
   $\Hcolor_{\mathrm{avg}}$ proved up to $O(q^{-1})$ in the present paper;
   $\Hcolor_{\mathrm{eff}}$ (equality of exponents) proved in the $q \to \infty$ limit;
-  $\Hcolor_{\mathrm{pointwise}}$ (exact profile equality at finite $q$ and $M$)
-  not claimed analytically, but consistent with all numerical results.
+  $\Hcolor_{\mathrm{pointwise}}$ (exact profile equality at finite $q$) proved under
+  the full-block orbit action in O31~\cite{Beau2026a35} via the single-frequency
+  structure of the fingerprint, with the independent-auxiliary residual measured here
+  consistent with all numerical results.
 
   \clearpage
   \bibliographystyle{plain}
