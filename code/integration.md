@@ -193,3 +193,19 @@ R_var observables can be recomputed across all primes essentially for free.
 
 Files: `verify_Uomega.py` (the vector-by-vector U_omega check), `sigma_freq.py`
 (standalone frequency-counting sigma), both also folded into spectral_O12.py.
+## 6. Version 2.0 scripts (`v2/`)
+
+Run from `code/v2/` with the project's Python environment (numpy).
+
+- `o32_null_test.py --code .. --q 61` (and `--q 151 --bfs-frac 0.29 --n0 3 --n1 13`): three checks.
+  T3 frequency-counting σ against Gram–Schmidt σ; T1 invariance under full-block scaling by random units
+  that are not cube roots; T2 window-averaged R_var for the four version-1.5 colour triplets against twenty
+  arbitrary triples (version-1.5 normalisation). Logs: `null-test-q61.log`, `null-test-q151.log`.
+- `o32_rebuild.py --code .. --primes 29 61 101 151 211 307 --out rebuild.json`: reproduces each character's
+  mean profile with the version-1.5 per-character seeds (M = 50, seed 42) and compares it with the stored
+  arrays; then computes R_var (unbiased variance) on usable shells only, i.e. shells n ≥ 1 at which no block
+  of any member has reached rank q. One JSON file per prime is written as `<out>.q<q>.json`; the committed
+  copies are renamed `rebuild-q<q>.json`. The reproduction check uses the shortest-block truncation of the
+  stored test primes; the stored controls (q = 29, 101) were zero-padded, so their check prints `inf` there,
+  while a zero-padded comparison reproduces them exactly (maximum difference 0).
+- `o32_rebuild_table.py`: turns the per-prime JSON files into the rows of the paper's rebuilt table.

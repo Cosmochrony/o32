@@ -7,27 +7,27 @@
 \usepackage{microtype}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{xcolor}
+\setlength{\emergencystretch}{1.5em}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}{Definition}
-\newtheorem{remark}{Remark}
-\newtheorem{hypothesis}{Hypothesis}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
 
 \newcommand{\Heis}{\mathrm{Heis}_3}
 \newcommand{\Zq}{\mathbb{Z}/q\mathbb{Z}}
-\newcommand{\sigc}{\sigma_c}
-\newcommand{\sigci}[1]{\sigma_{c_{#1}}}
-\newcommand{\sigtri}{\sigma_{\mathrm{tri}}}
-\newcommand{\dc}{\delta_c}
-\newcommand{\dtri}{\delta_{\mathrm{tri}}}
-\newcommand{\Vcolor}{\tilde{V}_{\mathrm{color}}}
+\newcommand{\Zqs}{(\mathbb{Z}/q\mathbb{Z})^{*}}
 \newcommand{\Hcolor}{[\mathrm{H\text{-}color}]}
+\newcommand{\Rvar}{R_{\mathrm{var}}}
+\newcommand{\dtri}{\delta_{\mathrm{tri}}}
+\newcommand{\Ccol}{C_{\mathrm{color}}}
 
-\title{Colour Triplet Co-admissibility on $\Heis(\Zq)$:\\
-Numerical Test of Hypothesis $\Hcolor$}
+\title{Limits of a Colour-Triplet Capacity Diagnostic on $\Heis(\Zq)$:\\
+Exact Unit-Scaling Invariance of the O12 Profile}
 
 \author{J\'er\^ome Beau\\
 Independent Researcher, Paris, France\\
@@ -40,726 +40,413 @@ Independent Researcher, Paris, France\\
   \maketitle
 
   \begin{abstract}
-    We report numerical evidence for Hypothesis~$\Hcolor$
-    (colour triplet
-    co-admissibility) on the Heisenberg group $\Heis(\Zq)$,
-    the key open condition in the derivation of $\mathrm{SU}(3)$ as the
-    admissible gauge group of the colour sector~\cite{Beau2026a35}.
-    For a prime $q \equiv 1 \pmod{3}$, a colour triplet is a set
-    $\{c_1, c_2, c_3\} \subset (\Zq)^*$ satisfying
-    $c_1 + c_2 + c_3 \equiv 0 \pmod{q}$ and pairwise non-conjugacy.
-    $\Hcolor$ asserts that the three BFS capacity profiles
-    $\sigma_{c_1}(n), \sigma_{c_2}(n), \sigma_{c_3}(n)$ are equal in the
-    pre-saturation window, i.e.\ that the three sectors are co-admissible.
-    The test observable is the inter-triplet variance ratio
-    $R_{\mathrm{var}} = \mathrm{Var}_{i}(\sigma_{c_{i}}(n)) /
-    \langle \sigma_{c_{i}}^2(n) \rangle$,
-    normalised against the intra-pair variance of conjugate pairs
-    $\{c, q-c\}$ (known co-admissible by O25~\cite{Beau2026a28}) as a
-    noise-floor reference.
-    We find $R_{\mathrm{var}} \approx 3.4 \times 10^{-3}$ at $q = 61$,
-    $7.1 \times 10^{-4}$ at $q = 151$, and $1.6 \times 10^{-3}$ at $q = 211$,
-    all at or below the noise floor $\mathtt{ctrl\_ref} = 3.81 \times 10^{-3}$
-    (calibrated from controls $q \in \{29, 101\}$), consistent with exact
-    co-admissibility up to block-sampling variance.
-    The triplet capacity exponent satisfies $\dtri \approx 3\dc$
-    at all three primes, confirming the additive structure predicted by O31.
-    All triplet covariance matrices $C_{\mathrm{color}} \in
-    \mathrm{End}(\Vcolor)$ have numerical rank~1.
-    We additionally prove that the block-averaged capacity profiles satisfy
-    $\mathbb{E}[\sigma_c(n)] = \mathbb{E}[\sigma_{\omega c}(n)] + O(q^{-1})$
-    analytically (Proposition~\ref{prop:avg-hcolor}), establishing
-    $\Hcolor_{\mathrm{eff}}$ (equality of capacity exponents) in the
-    $q \to \infty$ limit.
-    The companion paper O31~\cite{Beau2026a35} further shows that each fingerprint
-    vector is a single additive character, so the full-block orbit dilation
-    $k \mapsto \omega k$ makes $\Hcolor$ exact pointwise at finite $q$; the residual
-    $R_{\mathrm{var}}$ reported here is the finite-sample footprint of independent
-    auxiliary draws rather than a breaking of co-admissibility.
-    The observed decrease of $R_{\mathrm{var}}$ with $q$ is interpreted as the
-    finite-$q$ modulation bias predicted by this argument, with expected scaling
-    $R_{\mathrm{var}} \propto q^{-1}$.
-    The full campaign $q\in\{61,151,211,307\}$ uniformly passes
-    the criterion $R\leq 3$ (noise floor $\mathtt{ctrl\_ref} = 1.657\times10^{-3}$):
-    $R = 2.1$ ($q=61$, 1/4 triplets), $R = 0.4$ ($q=151$), $R = 1.0$ ($q=211$),
-    $R = 0.7$ ($q=307$).
+    Version~2.0 replaces version~1.5 and invalidates its interpretation.
+    Version~1.5 presented an inter-triplet variance ratio $\Rvar$, the slope relation
+    $\dtri\approx3\delta_c$ and the numerical rank of a $3\times3$ covariance as a test of
+    hypothesis~$\Hcolor$, and read the outcome as support for an $\mathrm{SU}(3)$ colour structure.
+    We show that this diagnostic cannot test~$\Hcolor$.
+    The O12 three-character capacity profile is exactly invariant under multiplication of the
+    whole character block by any unit $\lambda$ of $\Zq$: each fingerprint vector is a single
+    Fourier character, rank increments count distinct frequencies, and $\lambda$ permutes them.
+    Under the sampling law of the campaign, the profile attached to a character $c$ therefore has
+    the same distribution for every $c\neq0$, with no correction term and no role for cube roots
+    of unity.
+    The three version-1.5 observables consequently have laws independent of the characters
+    tested: colour triplets, conjugate pairs and arbitrary triples are indistinguishable, as null
+    controls at $q=61$ and $q=151$ confirm.
+    The relation $\dtri\approx3\delta_c$ is an identity of least-squares fitting, and the
+    rank-one covariance reflects identically distributed profiles.
+    The stored campaign is reproduced exactly; rebuilt on shells unaffected by rank saturation,
+    the calibration gives comparable ratios for all three kinds of character sets.
+    Version~1.5's Proposition~1, the pointwise and rank levels imported from O31, and the
+    $\mathrm{SU}(3)$, quark, baryon, confinement and $\beta^{*}$ readings are withdrawn.
+    Hypothesis~$\Hcolor$ is neither confirmed nor refuted: it is not testable with this observable.
   \end{abstract}
 
   \paragraph{Keywords.}
-    Heisenberg group, Weil representation, BFS capacity,
-    colour triplet, co-admissibility, SU(3), $\Hcolor$,
-    admissibility sub-programme.
+    Heisenberg group, Weil representation, BFS capacity, null control, unit scaling,
+    diagnostic limits, admissibility sub-programme.
 
-    \clearpage
-    \tableofcontents
+  \clearpage
+  \tableofcontents
+  \clearpage
 
-    \clearpage
+  \section{Status of this version}
+  \label{sec:status}
 
-  \section{Position of the Problem}
-  \label{sec:position}
+  Version~1.5 of this record~\cite{Beau2026a36} reported a numerical campaign on
+  $\Heis(\Zq)$ for $q\in\{61,151,211,307\}$, with controls $q\in\{29,101\}$, and presented
+  it as a test of hypothesis~$\Hcolor$ (colour-triplet co-admissibility) in the sense of
+  O31~\cite{Beau2026a35}.
+  O31 has since been replaced by a withdrawal notice: its colour-triplet co-admissibility,
+  arithmetic criterion and every gauge-group derivation are withdrawn.
+  The present version does not repair the version-1.5 conclusions.
+  It explains why the diagnostic used there could not have tested~$\Hcolor$, and makes that
+  explanation its central result.
 
-  O31~\cite{Beau2026a35} establishes that the full Standard Model gauge group
-  $G_{\mathrm{SM}} = \mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1)$
-  arises as the composite admissibility fixed point of the Born--Infeld-constrained
-  Weil representation on $\Heis(\Zq)$.
-  The $\mathrm{SU}(2)$ and $\mathrm{U}(1)$ factors are derived unconditionally
-  from the conjugate-pair structure (O27--O30~\cite{Beau2026a31,Beau2026a33,Beau2026a34}).
-  The $\mathrm{SU}(3)$ factor requires one additional hypothesis:
+  \paragraph{Withdrawn from version~1.5.}
+  \begin{enumerate}
+    \item The claim that the campaign tests, confirms or numerically supports~$\Hcolor$, and the
+    verdict ``$\Hcolor$ passes'' attached to the criterion $R\leq3$.
+    \item Proposition~1 of version~1.5 (averaged colour co-admissibility up to $O(q^{-1})$) and
+    the prediction $\Rvar\propto q^{-1}$.
+    The exact statement is Corollary~\ref{cor:law} below; it holds for every unit, carries no
+    colour content, and has no correction term.
+    \item The pointwise and rank levels of~$\Hcolor$ attributed to O31, and every statement that
+    the $\mathrm{SU}(3)$ identification on the standard Cayley graph is analytically established.
+    \item The additive-structure reading of $\dtri\approx3\delta_c$ as a prediction confirmed by
+    the data (Proposition~\ref{prop:ols}).
+    \item The evidential weight given to the numerical rank of $\Ccol$ (Remark~\ref{rmk:ccol}).
+    \item The physical interpretation: individual sectors as colour charges, quark quantum
+    numbers, colour triplets as baryon pre-images, structural confinement and the tower of
+    non-injective projections.
+    \item The open problem ``transfer chain $\dtri\to\alpha_s$'' as an analogue of
+    $\delta_{\mathrm{pair}}\to\beta^{*}\to m_e:m_\mu:m_\tau$.
+    O6 derives only the inequality $\beta\leq1/(\alpha+\tfrac12)$ and gives a countermodel to
+    equality~\cite{Beau2026a10}, so no such chain is available.
+    Version~1.5 also cited O24 where O25~\cite{Beau2026a29} was meant; that citation is
+    corrected.
+    \item The calibration values $\mathtt{ctrl\_ref}\in\{3.81,\,1.657,\,2.04\}\times10^{-3}$ and the
+    ratios $R$ derived from them (Section~\ref{sec:calibration}).
+  \end{enumerate}
 
-  \begin{hypothesis}[$\Hcolor$, O31 Def.~4.1 and Hyp.~4.6]
-    \label{hyp:hcolor}
-    Let $q \equiv 1 \pmod{3}$ and let $\omega \in (\Zq)^*$ be a primitive
-    cube root of unity.
-    A colour triplet $\{c_1, c_2, c_3\}$ with $c_2 = \omega c_1$,
-    $c_3 = \omega^2 c_1 \pmod{q}$ is \emph{co-admissible} if
-    \[
-      \sigma_{c_1}(n) = \sigma_{c_2}(n) = \sigma_{c_3}(n)
-      \quad \text{for all } n \text{ in the pre-saturation window.}
-    \]
-    Hypothesis~$\Hcolor$ asserts that this equality holds for all valid
-    colour triplets and all primes $q \equiv 1 \pmod{3}$.
-  \end{hypothesis}
+  \paragraph{What replaces them.}
+  An exact invariance theorem for the O12 profile (Section~\ref{sec:invariance}), its
+  consequence for the law of the campaign observables, null controls, an exact reproduction of
+  the stored campaign, and a calibration rebuilt on usable shells
+  (Sections~\ref{sec:numerics}--\ref{sec:calibration}).
+  Earlier versions remain available in the record's version history for traceability.
 
-  O31 proves $\mathrm{SU}(3)$ emergence unconditionally for the
-  colour-adapted Cayley graph (generating set $S_q^{(3)}$) and
-  conditionally on $\Hcolor$ for the standard generating set
-  $S_q = \{X^{\pm 1}, Y^{\pm 1}\}$.
-  O31~\cite{Beau2026a35} additionally establishes (i)~the exact generator-twist isospectrality
-  $\operatorname{spec}(\rho_c(P_{S_q})) = \operatorname{spec}(\rho_c(P_{\phi_\omega(S_q)}))$
-  for all $c$, and (ii)~that this does \emph{not} imply
-  $\operatorname{spec}(\rho_c(P_{S_q})) = \operatorname{spec}(\rho_{\omega c}(P_{S_q}))$,
-  closing the spectral approach to $\Hcolor$ on the standard graph
-  (Section~\ref{sec:discussion}).
-  The present paper provides the numerical test of $\Hcolor$ on the
-  standard graph.
-
-  \subsection*{Scope of O32}
-
-    O32 answers the following questions, in order of priority:
-
-    \begin{enumerate}
-      \item Is $R_{\mathrm{var}}$ at the noise floor of known co-admissible pairs
-      for $q \equiv 1 \pmod{3}$? (Primary $\Hcolor$ test.)
-      \item Does $\dtri \approx 3\dc$?
-      (Additive exponent structure, O31 §8.1.)
-      \item Does $C_{\mathrm{color}}$ have numerical rank~1?
-      (Co-linearity of triplet profiles.)
-      \item Does $R_{\mathrm{var}}$ decrease with $q$?
-      (Asymptotic convergence prediction.)
-    \end{enumerate}
-
-  \section{Setup and Notation}
+  \section{Setup}
   \label{sec:setup}
 
-  \subsection{Heisenberg group and generating set}
+  \subsection{Group, generators and BFS shells}
 
-    The discrete Heisenberg group modulo $q$ is
+    Let $q$ be an odd prime and $G_q=\Heis(\Zq)$, with elements $(a,b,z)$ and product
+    $(a,b,z)(a',b',z')=(a+a',\,b+b',\,z+z'+ab')$.
+    The generating set is $S_q=\{X^{\pm1},Y^{\pm1}\}$ with $X=(1,0,0)$ and $Y=(0,1,0)$.
+    The BFS shells $S_n$ of the Cayley graph from the identity are those of
+    O12~\cite{Beau2026a16}; $B_n=S_0\cup\dots\cup S_n$ denotes the ball of depth~$n$.
+    The second coordinate is additive, $b(gs)=b(g)+b(s)$, with $b(s)\in\{0,\pm1\}$ on~$S_q$.
+
+  \subsection{Fingerprints and the capacity profile}
+
+    For $c\in\Zqs$ write $\psi_c(t)=e^{2\pi i ct/q}$ and let $\rho_c$ act on $\mathbb{C}^q$ by
+    \begin{equation}
+      \bigl(\rho_c(a,b,z)f\bigr)(x)=\psi_c\bigl(z+b(x-a)\bigr)f(x-a).
+      \label{eq:schrodinger}
+    \end{equation}
+    A \emph{block} is a triple $\mathbf c=(c_1,c_2,c_3)\in(\Zqs)^3$ with total
+    $c=c_1+c_2+c_3\neq0$.
+    For a shell element $g$ and generators $s_1,s_2,s_3\in S_q$, put $g_1=gs_1$,
+    $g_2=gs_1s_2$, $g_3=gs_1s_2s_3$, and let $u_0=q^{-1/2}(1,\dots,1)$.
+    The O12 fingerprint vector is
+    \begin{equation}
+      f_{\mathbf c}(g;s_1,s_2,s_3)
+      =\bigl(\rho_{c_1}(g_1)u_0\bigr)\odot\bigl(\rho_{c_2}(g_2)u_0\bigr)\odot
+      \bigl(\rho_{c_3}(g_3)u_0\bigr),
+      \label{eq:fingerprint}
+    \end{equation}
+    with $\odot$ the coordinatewise product.
+    Let $r_n(\mathbf c)$ be the dimension of the span of all fingerprint vectors with $g\in B_n$,
+    computed by Gram--Schmidt in shell order, and $\Delta r_n=r_n-r_{n-1}$.
+    The capacity profile is
+    \begin{equation}
+      \sigma_{\mathbf c}(n)=\frac{\Delta r_n(\mathbf c)}{|S_n|}.
+      \label{eq:sigma}
+    \end{equation}
+
+  \subsection{The sampling law of the campaign}
+
+    For a character $c_1\in\Zqs$, the version-1.5 campaign draws $c_2,c_3$ independently and
+    uniformly from $\Zqs$, rejecting draws with $c_1+c_2+c_3=0$.
+    Write $\mathcal L_{c_1}$ for the resulting law of the block $\mathbf c=(c_1,c_2,c_3)$.
+    The profile assigned to $c_1$ is the mean $\bar\sigma_{c_1}$ of $M=50$ independent profiles
+    $\sigma_{\mathbf c}$ with $\mathbf c\sim\mathcal L_{c_1}$, each character using its own
+    random stream.
+    A \emph{colour triplet} in version~1.5 is an orbit $(c,\omega c,\omega^2c)$ with $\omega$ a
+    primitive cube root of unity, $q\equiv1\pmod3$, and no two members conjugate
+    ($c_i\neq-c_j$); its members sum to zero because $1+\omega+\omega^2=0$.
+    The version-1.5 abstract used a different definition (sum zero plus non-conjugacy); the
+    campaign used the orbit definition.
+
+  \section{Exact unit-scaling invariance}
+  \label{sec:invariance}
+
+  \begin{lemma}[Single-frequency fingerprints]
+    \label{lem:single}
+    For every block, shell element and generator path,
     \[
-      G_q = \Heis(\Zq)
-      = \left\{
-          \begin{pmatrix} 1 & a & c \\ 0 & 1 & b \\ 0 & 0 & 1 \end{pmatrix}
-          : a, b, c \in \Zq
-      \right\},
+      f_{\mathbf c}(g;s_1,s_2,s_3)=q^{-3/2}\,e^{2\pi i A/q}\,e_B,
+      \qquad e_B(x)=\psi_1(Bx),
+      \qquad B=c_1b(g_1)+c_2b(g_2)+c_3b(g_3),
     \]
-    with group order $|G_q| = q^3$ and standard generating set
-    $S_q = \{X^{\pm 1}, Y^{\pm 1}\}$ where $X = (1,0,0)$, $Y = (0,1,0)$.
-    The Cayley graph $\mathrm{Cay}(G_q, S_q)$ is 4-regular with polynomial
-    ball growth $|B_n| \sim C n^4$ (Bass--Guivarc'h, homogeneous dimension $D = 4$).
+    for some $A\in\Zq$ depending on the block, $g$ and the path.
+  \end{lemma}
 
-  \subsection{BFS capacity profile}
+  \begin{proof}
+    By~\eqref{eq:schrodinger}, $\bigl(\rho_c(a,b,z)u_0\bigr)(x)=q^{-1/2}\psi_c(z-ab)\,\psi_c(bx)$.
+    Multiplying the three factors in~\eqref{eq:fingerprint} gives the phase
+    $\sum_i c_i\bigl(z(g_i)-a(g_i)b(g_i)\bigr)$ and the frequency $\sum_ic_ib(g_i)$.
+  \end{proof}
 
-    Following O12--O25~\cite{Beau2026a16,Beau2026a28}, the BFS capacity
-    profile at character $c \in (\Zq)^*$ is
+  \begin{lemma}[Rank counts frequencies]
+    \label{lem:count}
+    Let $K_n(\mathbf c)\subset\Zq$ be the set of frequencies $B$ realised by $g\in B_n$ and all
+    paths. Then $r_n(\mathbf c)=|K_n(\mathbf c)|$.
+  \end{lemma}
+
+  \begin{proof}
+    The characters $e_B$, $B\in\Zq$, are pairwise orthogonal.
+    By Lemma~\ref{lem:single} every fingerprint is a non-zero multiple of one of them, so the
+    span of a family of fingerprints is the span of the distinct $e_B$ it contains.
+  \end{proof}
+
+  \begin{remark}[Closed form]
+    \label{rmk:closed}
+    O33~\cite[Theorem~1]{Beau2026a37} gives
+    $K_n(\mathbf c)=c[-(n+1),n+1]+\{0,\pm(c_2+c_3)\}+\{0,\pm c_3\}$ in $\Zq$, at every depth at
+    which the BFS ball $B_n$ is complete.
+    Only the second Heisenberg coordinate enters $K_n$; the group enters $\sigma$ through the
+    shell sizes $|S_n|$ alone.
+    The profile depends on the block only through $\bigl((c_2+c_3)/c,\;c_3/c\bigr)$.
+  \end{remark}
+
+  \begin{theorem}[Unit-scaling invariance]
+    \label{thm:invariance}
+    For every block $\mathbf c$, every $\lambda\in\Zqs$ and every $n$,
     \[
-      \sigc(n) = \frac{\delta r_n(c)}{|S_n|},
+      \sigma_{\lambda\mathbf c}(n)=\sigma_{\mathbf c}(n),
+      \qquad \lambda\mathbf c=(\lambda c_1,\lambda c_2,\lambda c_3).
     \]
-    where $\delta r_n(c)$ is the rank increment of the Weil representation
-    space in BFS shell~$n$, computed by the Gram--Schmidt pipeline of
-    \texttt{spectral\_O12.py}.
-    Each value $\sigc(n)$ is estimated from a block $(c, c_2, c_3)$ with
-    $c_2, c_3$ sampled uniformly from $(\Zq)^*$ subject to
-    $c + c_2 + c_3 \not\equiv 0 \pmod{q}$, following the O12 block
-    parameterisation~\cite{Beau2026a16}.
+  \end{theorem}
 
-  \subsection{Colour triplets}
+  \begin{proof}
+    The frequency of Lemma~\ref{lem:single} is linear in the block, so
+    $K_n(\lambda\mathbf c)=\lambda K_n(\mathbf c)$.
+    Multiplication by a unit is a bijection of $\Zq$, hence
+    $r_n(\lambda\mathbf c)=r_n(\mathbf c)$ for all $n$ by Lemma~\ref{lem:count}, and the
+    shell sizes do not depend on the block.
+  \end{proof}
 
-    For $q \equiv 1 \pmod{3}$, let $\omega \in (\Zq)^*$ be the smallest
-    primitive cube root of unity ($\omega^3 \equiv 1$, $\omega \neq 1$).
-    A \emph{valid colour triplet} is a triple
-    $(c_1, c_2, c_3) = (c, \omega c, \omega^2 c) \pmod{q}$ satisfying:
-    \begin{itemize}
-      \item[(T1)] All elements nonzero in $\Zq$.
-      \item[(T2)] Pairwise non-conjugacy: $c_i \not\equiv q - c_j \pmod{q}$
-      for all $i \neq j$.
-      \item[(T3)] Sum zero: $c_1 + c_2 + c_3 \equiv 0 \pmod{q}$ (automatic).
-    \end{itemize}
-    Condition~(T3) is the discrete analogue of the colour-neutrality
-    constraint for baryons.
-    For $q \equiv 2 \pmod{3}$, no primitive cube root of unity exists and
-    no valid triplet can be formed; such primes serve as controls.
+  The invariance holds for every unit.
+  The case $\lambda=\omega$ is the version-1.5 colour orbit, the case $\lambda=-1$ the
+  conjugate pair $\{c,q-c\}$; neither is distinguished from any other unit.
+  Multiplying the first character alone is not a symmetry: matched blocks
+  $(c,c_2,c_3)$ and $(\omega c,c_2,c_3)$ have different profiles in general.
 
-  \subsection{Test observables}
+  \begin{corollary}[Character-independent law]
+    \label{cor:law}
+    For all $c_1,c_1'\in\Zqs$, the profile $\sigma_{\mathbf c}$ has the same distribution under
+    $\mathcal L_{c_1}$ and under $\mathcal L_{c_1'}$.
+    In particular $\mathbb E_{\mathcal L_{c_1}}[\sigma(n)]=\mathbb E_{\mathcal L_{c_1'}}[\sigma(n)]$
+    exactly, for every $n$.
+  \end{corollary}
 
-    \textbf{Triplet capacity:}
+  \begin{proof}
+    Let $\lambda=c_1'/c_1$.
+    The map $(c_2,c_3)\mapsto(\lambda c_2,\lambda c_3)$ is a bijection of $(\Zqs)^2$ that maps
+    the rejected set $\{c_1+c_2+c_3=0\}$ onto $\{c_1'+c_2+c_3=0\}$, so it pushes
+    $\mathcal L_{c_1}$ forward to $\mathcal L_{c_1'}$.
+    Theorem~\ref{thm:invariance} identifies the profiles of corresponding blocks.
+  \end{proof}
+
+  \begin{corollary}[No observable of the campaign can separate character sets]
+    \label{cor:observables}
+    Let $\{c^{(1)},\dots,c^{(k)}\}$ be distinct characters whose mean profiles are computed from
+    independent draws.
+    Then the mean profiles $\bar\sigma_{c^{(1)}},\dots,\bar\sigma_{c^{(k)}}$ are independent and
+    identically distributed, with a law that does not depend on the characters.
+    Every statistic of these profiles, in particular $\Rvar$, $\dtri$ and $\Ccol$, has the same law
+    for a colour triplet, for a conjugate pair with any third character, and for any other
+    triple.
+  \end{corollary}
+
+  \begin{proof}
+    Independence holds by construction; identical distribution is Corollary~\ref{cor:law}
+    applied to each mean of $M$ independent profiles.
+  \end{proof}
+
+  Corollary~\ref{cor:observables} is the reason the version-1.5 criterion always passed:
+  $\Rvar$ measures the finite-$M$ sampling dispersion of identically distributed means.
+  It cannot fail for colour triplets more often than for any other choice of characters.
+  The corresponding pseudo-random streams are independent in the statistical sense used by the
+  campaign; the null controls of Section~\ref{sec:numerics} check the consequence directly.
+
+  \begin{proposition}[Slope additivity is an identity]
+    \label{prop:ols}
+    Fit $\log y(n)=-\delta\log(n+1)+\mathrm{const}$ by ordinary least squares on a common set of
+    shells $N$ with all values positive.
+    If $\sigma_{\mathrm{tri}}=\bar\sigma_{c_1}\bar\sigma_{c_2}\bar\sigma_{c_3}$, then
+    $\dtri=\delta(\bar\sigma_{c_1})+\delta(\bar\sigma_{c_2})+\delta(\bar\sigma_{c_3})$.
+  \end{proposition}
+
+  \begin{proof}
+    $\log\sigma_{\mathrm{tri}}=\sum_i\log\bar\sigma_{c_i}$, and the least-squares slope on a fixed
+    design is a linear function of the response vector.
+  \end{proof}
+
+  The deviations of 0.7--2.2\% between $\dtri$ and $3\bar\delta_c$ reported in version~1.5 do
+  not test any structure.
+  There, $\bar\delta_c$ was a mean of per-block fits over twelve characters, whereas $\dtri$
+  fitted the product of three mean profiles, on windows that at $q=61$ held one or two shells
+  (Section~\ref{sec:calibration}).
+
+  \begin{remark}[The covariance $\Ccol$]
+    \label{rmk:ccol}
+    $\Ccol$ is the $3\times3$ covariance, over shells, of three identically distributed mean
+    profiles $\bar\sigma_{c_i}(n)=\mu(n)+\varepsilon_i(n)$, with $\mu$ the common expectation.
+    Its leading eigenvalue is the variance of the decaying function $\mu$ over the window, and the
+    other two are of the order of the sampling noise.
+    Numerical rank one is therefore expected for every triple of characters, and the matrix carries
+    no representation-theoretic content: no space $\tilde V_{\mathrm{color}}$ is constructed on
+    which it would act.
+  \end{remark}
+
+  \section{Exact checks and null controls}
+  \label{sec:numerics}
+
+  All checks use the version-1.5 code in \texttt{code/} and the null-control and rebuild scripts
+  added in this version in \texttt{code/v2/}.
+  The frequency-counting profile \texttt{sigma\_freq.py} implements Lemma~\ref{lem:count}.
+
+  \begin{itemize}
+    \item[(E1)] \emph{Frequency counting versus Gram--Schmidt.}
+    On three random blocks at each of $q=61$ and $q=151$ the two profiles agree exactly (maximum
+    difference~$0$); the same agreement underlies the exact reproduction of
+    Section~\ref{sec:calibration}, which used frequency counting throughout.
+    \item[(E2)] \emph{Unit scaling.}
+    For thirty random blocks and thirty random units $\lambda$ that are not cube roots of unity,
+    $\sigma_{\lambda\mathbf c}=\sigma_{\mathbf c}$ at every shell, at $q=61$ and $q=151$ (maximum
+    difference~$0$).
+    \item[(E3)] \emph{Null control.}
+    With the campaign protocol ($M=50$, version-1.5 windows), the four version-1.5 colour triplets
+    and twenty arbitrary triples containing no cube-root orbit give the window-averaged ratios
+    below, in units of $10^{-3}$ (the version-1.5 normalisation, population variance).
+  \end{itemize}
+
+  \begin{center}
+    \begin{tabular}{rcccc}
+      \toprule
+      $q$ & window & colour triplets, mean of 4 & arbitrary triples, mean of 20 & their range \\
+      \midrule
+      61  & $[2,8]$  & 12.8 & 13.2 & 3.64--35.7 \\
+      151 & $[3,13]$ & 3.74 & 3.51 & 1.28--7.39 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  The colour-triplet values lie inside the range of the arbitrary triples at both primes, as
+  Corollary~\ref{cor:observables} requires.
+  These window averages include shells at which some blocks have saturated; Section~\ref{sec:calibration}
+  repeats the comparison on usable shells.
+
+  \section{Reproduction and rebuilt calibration}
+  \label{sec:calibration}
+
+  \subsection{Reproduction of the stored campaign}
+
+    The stored arrays \texttt{results\_o32.npz} and \texttt{results\_o32\_controls.npz} are
+    reproduced exactly (maximum difference~$0$) with $M=50$, seed~$42$ and the per-character
+    streams of \texttt{o32\_triplet\_pipeline.py}.
+    Two conventions coexist in them.
+    The test-prime means are truncated to the shortest of the $M$ block profiles, whereas the
+    control means are zero-padded to the longest.
+    The version-1.5 ratio $R$ compared quantities computed under the two conventions.
+    Version~1.5 also stated three different noise floors ($3.81$, $1.657$ and
+    $2.04\times10^{-3}$); the first two depend on which primes were summarised together, and the
+    third matches no stored run.
+    The parameter table gave $M=20$ for $q=29$; the stored control used $M=50$.
+
+  \subsection{Usable shells}
+
+    A shell $n\geq1$ is \emph{usable} for a set of characters if no block contributing to any of
+    their profiles has reached rank $q$ by shell $n$.
+    On usable shells no increment is truncated by saturation and no mean includes padding.
+    Usable shells are few at small primes: none at $q=29$, where every block reaches rank $q$ at $n=1$, one
+    or two at $q=61$, four at $q=101$, six to eight at $q=151$, ten to twelve at $q=211$ and fifteen to
+    nineteen at $q=307$ (Table~\ref{tab:rebuilt}).
+    The windows of the stored version-1.5 runs ($[2,3]$ for $q=29$, although the paper's table gave $[2,5]$;
+    $[2,8]$ for $q=61$) therefore lay mostly beyond saturation, and the version-1.5 value of $\Rvar$ at $q=61$
+    was the single shell $n=2$.
+
+  \subsection{Rebuilt ratios}
+
+    On usable shells only, define
     \[
-      \sigtri(n) = \sigci{1}(n) \cdot \sigci{2}(n) \cdot \sigci{3}(n).
+      \Rvar=\Bigl\langle
+      \frac{\operatorname{Var}_i\bigl(\bar\sigma_{c_i}(n)\bigr)}{\langle\bar\sigma_{c_i}(n)^2\rangle_i}
+      \Bigr\rangle_{n\ \mathrm{usable}},
     \]
+    with the unbiased variance, so that sets of two and three characters are comparable.
+    For each prime the table gives the mean over groups and, in parentheses, the range over groups.
+    Colour triplets are the four version-1.5 triplets; conjugate pairs are the four smallest pairs
+    $\{c,q-c\}$; arbitrary triples are twelve random triples containing no cube-root orbit, drawn with seed
+    $20261119+q$.
+    At test primes the pairs and triples use fresh streams, so their values depend on the seed; at control
+    primes the pairs are the version-1.5 control characters.
 
-    \textbf{Inter-triplet variance ratio:}
-    \[
-      R_{\mathrm{var}}(n) = \frac{\mathrm{Var}_i\bigl(\sigci{i}(n)\bigr)}
-      {\langle \sigci{i}(n)^2 \rangle},
-    \]
-    where the average is over the three elements of the triplet.
-    Under exact $\Hcolor$, $R_{\mathrm{var}}(n) = 0$; in practice it
-    measures block-sampling noise relative to signal.
-
-    \textbf{Triplet capacity exponent:}
-    Fit $\log \sigtri(n) = -\dtri \log(n+1) + \mathrm{const}$
-    in the pre-saturation window $[n_0, n_1]$, following the O25
-    convention~\cite{Beau2026a28}.
-    The additive structure of the Weil representation predicts
-    $\dtri \approx 3\dc$.
-
-    \textbf{Colour covariance:}
-    \[
-      C_{\mathrm{color}} = \mathrm{Cov}\bigl(
-      \sigci{1}(n), \sigci{2}(n), \sigci{3}(n)\bigr)_{n \in [n_0, n_1]}
-      \in \mathrm{End}(\Vcolor) \cong \mathbb{R}^{3 \times 3}.
-    \]
-    Under exact $\Hcolor$, the three profiles are identical and
-    $C_{\mathrm{color}}$ has rank~1.
-
-    \textbf{Control reference:}
-    For $q \equiv 2 \pmod{3}$, no triplets exist.
-    We compute the intra-pair variance of conjugate pairs $\{c, q-c\}$
-    (co-admissible by O25) and use the same normalisation to obtain a
-    noise-floor reference $R_{\mathrm{var}}^{\mathrm{ctrl}}$.
-    The falsification criterion (O31 §8.2) is:
-    \[
-      \text{[H-color] passes} \iff
-      R = \frac{R_{\mathrm{var}}}{R_{\mathrm{var}}^{\mathrm{ctrl}}} \leq 3.
-    \]
-
-  \section{Numerical Protocol}
-  \label{sec:protocol}
-
-  \subsection{Prime selection}
-
-    \begin{center}
-      \begin{tabular}{rccl}
-        \toprule
-        $q$ & $q \bmod 3$ & $\omega$ & Role \\
-        \midrule
-        29  & 2 & --- & control (no triplets) \\
-        61  & 1 & 13  & test \\
-        101 & 2 & --- & control \\
-        151 & 1 & 32  & test \\
-        211 & 1 & 14 & test (completed) \\
-        307 & 1 & 17 & test (completed) \\
-        \bottomrule
-      \end{tabular}
-    \end{center}
-
-  \subsection{Pipeline parameters}
-
-    All computations use \texttt{o32\_triplet\_pipeline.py},
-    built on the
-    \texttt{spectral\_O12.py} BFS/Gram--Schmidt engine.
-    Parameters follow O25~\cite{Beau2026a28} exactly:
-
-    \begin{center}
-      \begin{tabular}{lccccc}
-        \toprule
-        $q$ & $M$ & \texttt{bfs\_frac} & $n_{\max}$
-        & Window $[n_0, n_1]$ & Triplets \\
-        \midrule
-        29  & 20 & 0.99 & 8  & [2, 5] (table) & --- (ctrl) \\
-        61  & 50 & 0.99 & 10 & [2, 8] (auto)  & 4 \\
-        151 & 50 & 0.29 & 37 & [3, 13] (auto) & 4 \\
-        211 & 50 & 0.11 & 50 & [3, 14] (auto) & 4 \\
-        307 & 50 & 0.08 & 70 & [3, 16] (auto) & 4 \\
-        \bottomrule
-      \end{tabular}
-    \end{center}
-
-    $M$ is the number of independently sampled blocks per character.
-    The auto-window calibration uses five probe blocks per prime to
-    identify the linear regime of $\log \sigc(n)$ vs.\ $\log(n+1)$.
-
-  \subsection{Triplet identification}
-
-    For each test prime $q$, we enumerate valid colour triplets
-    $(c, \omega c, \omega^2 c)$ satisfying conditions (T1)--(T2).
-    We retain the first four distinct orbits (up to the $\mathbb{Z}_3$
-    symmetry $c \mapsto \omega c$) to sample different regions of
-    $(\Zq)^*$.
-    The $\mathbb{Z}_3$ orbit structure ensures $c_1 + c_2 + c_3 \equiv 0$
-    by construction.
-
-  \section{Results}
-  \label{sec:results}
-
-  \subsection{Primitive cube roots and triplets}
-
-    \begin{center}
-      \begin{tabular}{rrl}
-        \toprule
-        $q$ & $\omega$ & First four valid triplets \\
-        \midrule
-        61  & 13 & $(1,13,47)$, $(2,26,33)$, $(3,39,19)$, $(4,52,5)$ \\
-        151 & 32 & $(1,32,118)$, $(2,64,85)$, $(3,96,52)$, $(4,128,19)$ \\
-        211 & 14 & $(1,14,196)$, $(2,28,181)$, $(3,42,166)$, $(4,56,151)$ \\
-        307 & 17 & $(1,17,289)$, $(2,34,271)$, $(3,51,253)$, $(4,68,235)$ \\
-        \bottomrule
-      \end{tabular}
-    \end{center}
-
-    All listed triplets satisfy (T1)--(T3) and have been verified numerically.
-
-  \subsection{Individual character exponents}
-
-    \begin{center}
+    \begin{table}[h]
+      \centering
+      \small
       \begin{tabular}{rcccc}
         \toprule
-        $q$ & $\#$ chars & $\bar{\dc}$ & $\sigma(\dc)$
-        & $\overline{R^2}$ \\
+        $q$ & usable shells & colour triplets & conjugate pairs & arbitrary triples \\
         \midrule
-        61  & 12 & 5.072 & 0.154 & 0.984 \\
-        151 & 12 & 4.520 & 0.057 & 0.981 \\
-        211 & 12 & 4.396 & 0.079 & 0.983 \\
-        307 & 12 & 4.183 & 0.069 & 0.987 \\
+        29 & 0 & --- & --- & --- \\
+        61 & 1--2 & 1.94 (0.39--5.07) & 0.99 (0--2.20) & 4.06 (0.34--8.21) \\
+        101 & 4 & --- & 5.16 (0.37--17.12) & 4.60 (0.81--14.21) \\
+        151 & 6--8 & 2.41 (1.78--3.35) & 4.71 (0.97--7.00) & 3.49 (0.46--7.11) \\
+        211 & 10--12 & 3.01 (0.85--6.15) & 3.47 (0.97--7.08) & 3.12 (0.85--5.55) \\
+        307 & 15--19 & 3.14 (1.44--4.81) & 3.09 (1.67--4.24) & 4.26 (1.05--8.43) \\
         \bottomrule
       \end{tabular}
-    \end{center}
+      \caption{Rebuilt variance ratio $\Rvar$ on usable shells, in units of $10^{-3}$ (unbiased variance; mean
+      over groups, range in parentheses). Dashes: no colour triplet ($q\equiv2\pmod3$) or no usable shell.}
+      \label{tab:rebuilt}
+    \end{table}
 
-    The standard deviation of $\dc$ across the 12 characters decreases from
-    0.154 at $q=61$ to 0.057 at $q=151$ (a factor of 2.7), consistent with
-    convergence of character exponents as $q$ grows.
+    At every test prime the colour-triplet mean lies inside the range of the arbitrary triples, the ranges of
+    the three kinds of character sets overlap, and their means are of the same order, as
+    Corollary~\ref{cor:observables} requires.
+    No noise floor is needed: the comparison is between sets of characters at the same prime, under the same
+    convention.
 
-  \subsection{Triplet capacity exponent and additive structure}
+  \section{What remains open}
+  \label{sec:open}
 
-    \begin{center}
-      \begin{tabular}{rccccc}
-        \toprule
-        $q$ & $\bar{\dc}$ & $3\bar{\dc}$ & $\bar{\dtri}$ & $\sigma(\dtri)$
-        & $|3\bar{\dc} - \bar{\dtri}|/\bar{\dtri}$ \\
-        \midrule
-        61  & 5.072 & 15.216 & 14.888 & 0.000 & 2.2\% \\
-        151 & 4.520 & 13.559 & 13.466 & 0.148 & 0.7\% \\
-        211 & 4.396 & 13.189 & 13.020 & 0.124 & 1.3\% \\
-        307 & 4.183 & 12.549 & 12.355 & 0.048 & 1.5\% \\
-        \bottomrule
-      \end{tabular}
-    \end{center}
+  \begin{enumerate}
+    \item \emph{A discriminating observable.}
+    Any test of a colour orbit must use an observable that is not invariant under all units, since
+    Theorem~\ref{thm:invariance} makes the O12 profile blind to the choice of the character up to a
+    common scale.
+    No such observable is proposed here.
+    \item \emph{The status of~$\Hcolor$.}
+    The hypothesis is neither confirmed nor refuted by the present record.
+    Its formulation, the selection of an order-three orbit, and any group identification depend on
+    a carrier and a theorem that the programme does not currently supply~\cite{Beau2026a35}.
+    \item \emph{Physical readings.}
+    No colour charge, quark, baryon or confinement statement is supported by this record.
+  \end{enumerate}
 
-    The prediction $\dtri \approx 3\dc$ holds at the percent level for both
-    primes, with the discrepancy decreasing with $q$.
-    At $q = 151$, $\bar{\dtri} = 13.466 \pm 0.148$ against the prediction
-    $3\bar{\dc} = 13.559$, a relative deviation of 0.7\%.
-
-    \begin{remark}
-      The $q=61$ result reports $\sigma(\dtri) = 0$ because only one of the
-      four triplets yields a valid $\dtri$ estimate at this prime.
-      The remaining three triplets produce $\dtri = \mathrm{NaN}$ due to
-      short sigma profiles in the zero-padded regime.
-      This is a known numerical artefact of the pipeline at $q = 61$ with
-      $n_{\max} = 10$; it does not affect the var\_ratio observable, which
-      is computed from all four triplets.
-      The $q = 151$ run is not affected (all four triplets yield valid fits).
-    \end{remark}
-
-  \subsection{Inter-triplet variance ratio}
-
-    \begin{center}
-      \begin{tabular}{rcccc}
-        \toprule
-        $q$ & $q \bmod 3$ & $R_{\mathrm{var}}^{\mathrm{(window)}}$
-        & $R_{\mathrm{var}}^{\mathrm{ctrl}}$ & $R$ \\
-        \midrule
-        29  & 2 (ctrl) & --- & $4.44 \times 10^{-4}$ & ctrl \\
-        101 & 2 (ctrl) & --- & $3.34 \times 10^{-3}$ & ctrl \\
-        \multicolumn{5}{l}{\footnotesize Combined noise floor:
-          $\mathtt{ctrl\_ref} = 1.657\times10^{-3}$. Criterion: $R\leq 3$.} \\
-        61  & 1 (test) & $3.44 \times 10^{-3}$ & $1.657 \times 10^{-3}$ & $2.1$ \checkmark \\
-        151 & 1 (test) & $7.09 \times 10^{-4}$ & $1.657 \times 10^{-3}$ & $0.4$ \checkmark \\
-        211 & 1 (test) & $1.60 \times 10^{-3}$ & $1.657 \times 10^{-3}$ & $1.0$ \checkmark \\
-        307 & 1 (test) & $1.17 \times 10^{-3}$ & $1.657 \times 10^{-3}$ & $0.7$ \checkmark \\
-        \bottomrule
-      \end{tabular}
-    \end{center}
-
-    With both controls ($q=29$, M=50; $q=101$, M=50) calibrated, the combined
-    noise floor is $\mathtt{ctrl\_ref} = 3.81 \times 10^{-3}$.
-    All three test primes satisfy $R \leq 1$: $R = 0.90$ ($q=61$),
-    $R = 0.19$ ($q=151$), $R = 0.42$ ($q=211$).
-    The triplet variance is at or below the control noise floor in every case,
-    consistent with exact co-admissibility.
-
-    The $q$-dependence of $R_{\mathrm{var}}$ follows an approximate power law:
-    \begin{equation}
-      R_{\mathrm{var}}(q) \;\approx\; A \cdot q^{-\alpha},
-      \label{eq:powerlaw}
-    \end{equation}
-    with the caveat that $q=211$ (bfs\_frac$=0.11$, partial BFS) shows
-    $R_{\mathrm{var}}$ slightly above $q=151$ (bfs\_frac$=0.29$), likely
-    reflecting the reduced BFS coverage rather than a systematic trend.
-    With the complete four-prime dataset, $R_{\mathrm{var}}$ values
-    $\{3.44, 0.71, 1.60, 1.17\}\times10^{-3}$ for $q\in\{61,151,211,307\}$
-    are non-monotone (varying BFS coverage dominates over $q$-dependence).
-    All satisfy $R\leq 3$, confirming~$\Hcolor$.
-
-  \subsection{Colour covariance}
-    \label{sec:ccolor}
-
-    The colour covariance matrix $C_{\mathrm{color}}$ is computed over the
-    pre-saturation window for each triplet.
-    All triplets at $q = 151$ (and one at $q = 61$) yield:
-
-    \begin{center}
-      \begin{tabular}{rlll}
-        \toprule
-        $q$ & Triplet & Eigenvalues of $C_{\mathrm{color}}$ & Rank \\
-        \midrule
-        61  & $(1,13,47)$    & $\approx (0,\ 0,\ 3.69\times10^{-1})$ & 1 \\
-        151 & $(1,32,118)$   & $\approx (0,\ 2\times10^{-6},\ 4.74\times10^{-2})$ & 1 \\
-        151 & $(2,64,85)$    & $\approx (1\times10^{-6},\ 3\times10^{-6},\ 4.63\times10^{-2})$ & 1 \\
-        151 & $(3,96,52)$    & $\approx (1\times10^{-6},\ 9\times10^{-6},\ 4.23\times10^{-2})$ & 1 \\
-        151 & $(4,128,19)$   & $\approx (0,\ 1\times10^{-5},\ 4.19\times10^{-2})$ & 1 \\
-        211 & $(1,14,196)$   & $\approx (0,\,5\times10^{-6},\,4.83\times10^{-2})$ & 1 \\
-        211 & $(2,28,181)$   & $\approx (0,\,1\times10^{-6},\,4.10\times10^{-2})$ & 1 \\
-        211 & $(3,42,166)$   & $\approx (0,\,2\times10^{-6},\,4.28\times10^{-2})$ & 1 \\
-        211 & $(4,56,151)$   & $\approx (0,\,1\times10^{-6},\,4.13\times10^{-2})$ & 1 \\
-        307 & $(1,17,289)$   & $\approx (0,\,3\times10^{-6},\,3.74\times10^{-2})$ & 1 \\
-        307 & $(2,34,271)$   & $\approx (0,\,2\times10^{-6},\,4.06\times10^{-2})$ & 1 \\
-        307 & $(3,51,253)$   & $\approx (1\times10^{-6},\,4\times10^{-6},\,3.80\times10^{-2})$ & 1 \\
-        307 & $(4,68,235)$   & $\approx (0,\,1\times10^{-6},\,3.87\times10^{-2})$ & 1 \\
-        \bottomrule
-      \end{tabular}
-    \end{center}
-
-    In all cases, two eigenvalues are at or below numerical precision
-    ($\lesssim 10^{-5}$), confirming rank~1.
-    Rank~1 means the three $\sigci{i}(n)$ profiles are co-linear: they differ
-    at most by an amplitude factor, not by shape.
-    This is the sharpest numerical expression of co-admissibility available
-    at finite $M$.
-
-  \section{Discussion}
-  \label{sec:discussion}
-
-  \subsection{Epistemic status of \texorpdfstring{$\Hcolor$}{[H-color]}}
-
-    The numerical evidence from $q \in \{61, 151, 211\}$ supports $\Hcolor$ at
-    the level of $M = 50$ blocks, with the calibrated ratio satisfying $R \leq 1$
-    at all three primes and the triplet covariance matrices having numerical rank~1.
-    The $R_{\mathrm{var}}$ at $q = 151$ is a factor of~5 smaller than at $q = 61$,
-    consistent with convergence.
-
-    The status of $\Hcolor$ can now be sharpened beyond purely numerical support.
-    With auxiliary characters drawn independently for $c$, $\omega c$, $\omega^2 c$, the pointwise
-    equality $\sigma_c(n) = \sigma_{\omega c}(n) = \sigma_{\omega^2 c}(n)$ at fixed $q$ and fixed
-    shell is sensitive to block-sampling fluctuations; the analytically relevant object for this
-    sampling protocol is the block-averaged profile, for which the colour symmetry holds in
-    expectation up to a controlled finite-$q$ correction, as the following argument establishes.
-    Under the full-block orbit action, by contrast, the equality is exact at finite $q$
-    (Remark~\ref{rmk:exact-coscale}).
-
-    \begin{proposition}[Averaged colour co-admissibility]
-      \label{prop:avg-hcolor}
-      Let $q \equiv 1 \pmod{3}$ and let $(c_1, c_2, c_3) = (c, \omega c, \omega^2 c)$
-      be a valid colour triplet.
-      In the O12 fingerprint pipeline, the BFS fingerprint vector for a block
-      $(c, c_2, c_3)$, shell element $g$, and generator path $(s_1, s_2, s_3)$
-      has the form
-      \begin{equation}
-        \label{eq:fingerprint-modulation}
-        f(x) \;\propto\;
-        \exp\!\left(\frac{2\pi i}{q}\,k\,x\right),
-        \qquad
-        k = c\,B_1 + c_2\,B_2 + c_3\,B_3 \pmod{q},
-      \end{equation}
-      where $B_j$ denotes the $b$-coordinate of $g\,s_1\cdots s_j$.
-      Two fingerprint vectors sharing the same modulation frequency $k$ are
-      collinear; the rank increment at shell~$n$ is therefore the number of
-      new distinct frequencies $k$ encountered.
-
-      For blocks with $B_2 = B_3 = 0$ (both $s_2, s_3 \in \{X^{\pm 1}\}$),
-      the frequency is $k = c\,B_1$ or $k' = \omega c\,B_1$ for blocks
-      starting with $c$ or $\omega c$ respectively.
-      Since multiplication by $\omega$ is a bijection on $(\mathbb{Z}/q\mathbb{Z})^*$,
-      the sets $\{c\,B_1 \bmod q : g \in \text{shell}\}$ and
-      $\{\omega c\,B_1 \bmod q : g \in \text{shell}\}$ have the same cardinality
-      at every BFS depth.
-      The rank increments for $c$ and $\omega c$ are \emph{exactly equal} for
-      these paths.
-
-      For blocks with $B_3 \neq 0$, fixing $(B_1, B_2, B_3)$ and letting
-      $c_2, c_3$ range independently over $(\mathbb{Z}/q\mathbb{Z})^*$, the
-      distribution of $k$ over valid blocks $(c, c_2, c_3)$ assigns probability
-      $(q-1)/(q-1)^2$ to the distinguished value $k = c\,B_1$ and
-      $(q-2)/(q-1)^2$ to every other value.
-      Replacing $c$ by $\omega c$ shifts the distinguished value from $c\,B_1$
-      to $\omega c\,B_1$ without altering the shape of the distribution.
-      Consequently, for each shell $n$,
-      \begin{equation}
-        \label{eq:avg-equality}
-        \mathbb{E}_{c_2, c_3}\bigl[\sigma_c(n)\bigr]
-        \;=\;
-        \mathbb{E}_{c_2, c_3}\bigl[\sigma_{\omega c}(n)\bigr]
-        \;+\; O(q^{-1}),
-      \end{equation}
-      and similarly for $\omega^2 c$.
-      The $O(q^{-1})$ correction arises because the distinguished frequency
-      receives excess probability $(q-1-(q-2))/(q-1)^2 = O(q^{-2})$
-      per frequency; accumulated over the rank window of size $O(q)$, this
-      contributes $O(q^{-1})$ to the capacity profile.
-    \end{proposition}
-
-    \begin{remark}[Exact pointwise equality under the full-block orbit action]
-      \label{rmk:exact-coscale}
-      The $O(q^{-1})$ correction in Proposition~\ref{prop:avg-hcolor} arises only because the
-      auxiliary characters $c_2, c_3$ are drawn independently for $c$ and for $\omega c$.
-      If instead the whole block is acted on by the orbit dilation
-      $(c, c_2, c_3) \mapsto (\omega c, \omega c_2, \omega c_3)$, then by~\eqref{eq:fingerprint-modulation}
-      every modulation frequency transforms as $k \mapsto \omega k$, for all generator paths, not only
-      those with $B_2 = B_3 = 0$.
-      Since $k \mapsto \omega k$ is a bijection of $\Zq$, it preserves the number of distinct
-      frequencies at every shell, so
-      $\sigma_c(n) = \sigma_{\omega c}(n) = \sigma_{\omega^2 c}(n)$ holds \emph{exactly} at finite $q$,
-      with no averaging.
-      This is $\Hcolor_{\mathrm{pointwise}}$ under the orbit action; it is proved in
-      O31~\cite{Beau2026a35} (single-frequency structure of the fingerprint and the dilation unitary
-      $U_\omega$).
-      The residual $R_{\mathrm{var}}$ measured here reflects the independent-auxiliary sampling of the
-      present campaign, not a finite-$q$ breaking of co-admissibility.
-    \end{remark}
-
-    We therefore distinguish three levels of the colour hypothesis.
-    $\Hcolor_{\mathrm{pointwise}}$ asserts exact equality of the finite-$q$ profiles; under the
-    full-block orbit action it holds exactly (Remark~\ref{rmk:exact-coscale}), while the
-    independent-auxiliary version is the finite-$M$ statement probed by $R_{\mathrm{var}}$.
-    $\Hcolor_{\mathrm{avg}}$ asserts equality of the block-averaged profiles up
-    to the $O(q^{-1})$ modulation correction; this is established analytically
-    by Proposition~\ref{prop:avg-hcolor}.
-    $\Hcolor_{\mathrm{eff}}$ asserts equality of the capacity exponents
-    $\delta_c = \delta_{\omega c} = \delta_{\omega^2 c}$ in the $q \to \infty$
-    limit; this follows immediately from~\eqref{eq:avg-equality}, since the
-    $O(q^{-1})$ correction vanishes in the limit.
-
-    The condition required for the asymptotic $\mathrm{SU}(3)$ identification
-    is $\Hcolor_{\mathrm{eff}}$, which is now analytically established.
-    Under the orbit action on the full block, $\Hcolor_{\mathrm{pointwise}}$ holds
-    exactly at finite $q$ (Remark~\ref{rmk:exact-coscale}, proved in
-    O31~\cite{Beau2026a35}).
-    The residual variance $R_{\mathrm{var}}$ measured here probes the
-    independent-auxiliary version of the finite-$q$, finite-$M$ profiles, which
-    is precisely the quantity measured by the present campaign and predicted by
-    the modulation argument to scale as $R_{\mathrm{var}}(q) \propto q^{-1}$
-    (Section~\ref{ssec:residual-scaling}).
-
-  \subsection{Scaling of the residual variance}
-    \label{ssec:residual-scaling}
-
-    Proposition~\ref{prop:avg-hcolor} provides a quantitative prediction for
-    the residual inter-triplet variance.
-    The distinguished modulation frequency $k = c\,B_1$ receives excess
-    probability $O(q^{-2})$ per frequency relative to the uniform distribution.
-    After aggregation over the admissible rank window of size $O(q)$, this
-    produces a residual difference of order $O(q^{-1})$ in the capacity profiles.
-    The expected scaling is therefore
-    \begin{equation}
-      \label{eq:rvar-scaling}
-      R_{\mathrm{var}}(q) \;\propto\; q^{-1},
-    \end{equation}
-    up to finite-block fluctuations and shell-window effects.
-    This gives a quantitative, parameter-free interpretation of the observed
-    non-zero residual variance: it is the finite-$q$ footprint of the modulation
-    bias, not evidence against colour co-admissibility.
-    The observed decrease of $R_{\mathrm{var}}$ between $q = 61$ and $q = 151, 211$
-    is consistent with this prediction.
-    With $q=307$ now available ($R=0.7$, $R_{\mathrm{var}}=1.17\times10^{-3}$),
-    the four-prime dataset is complete; non-monotone $R_{\mathrm{var}}$ behaviour
-    suggests BFS coverage dominates over any $q^{-1}$ scaling at current precision.
-
-  \subsection{Additive exponent structure}
-
-    The agreement $\dtri \approx 3\dc$ at sub-percent level for $q=151$
-    confirms the multiplicative factorisation $\sigtri = \sigci{1} \cdot
-  \sigci{2} \cdot \sigci{3}$ implies additive exponents.
-    This is the triplet analogue of the O25 pair relation
-    $\delta_{\mathrm{pair}} = \delta_c + \delta_{q-c}$~\cite{Beau2026a28}.
-    It is consistent with the three sectors being statistically independent
-    copies of the same Weil capacity process — the content of $\Hcolor$.
-
-  \subsection{Physical interpretation: individual sectors as colour charges}
-
-    The confirmation of $\Hcolor$ has a direct physical reading.
-    Each element $c_i$ of a valid triplet belongs simultaneously to:
-    \begin{itemize}
-      \item a conjugate pair $\{c_i, q-c_i\}$, which carries a
-      spin-$\frac{1}{2}$ Weil-trajectory space $V_\rho \cong \mathbb{C}^2$
-      (O29~\cite{Beau2026a33}, $d_\rho = 2$);
-      \item a colour triplet $\{c_1, c_2, c_3\}$, whose admissibility fixed
-      point is $\mathrm{SU}(3)$ under $\Hcolor$~\cite{Beau2026a35}.
-    \end{itemize}
-    An individual sector $c_i$ therefore carries simultaneously spin-$\frac{1}{2}$
-    and one colour charge: the minimal quantum-number content of a quark.
-    The confirmation of $\Hcolor$ is thus a necessary step toward identifying
-    individual admissible sectors as colour-charge carriers, and colour triplets
-    as the pre-image structure of colour-neutral baryons.
-
-    This identification is strengthened by condition~(T3): the sum-zero constraint
-    $c_1 + c_2 + c_3 \equiv 0 \pmod{q}$, derived from the $\mathbb{Z}_3$ orbit
-    structure, is the discrete analogue of the baryon colour-neutrality condition
-    $r + g + b = 0$.
-    It is not imposed by hand but follows from the Born--Infeld admissibility
-    of the triplet orbit.
-
-    We stress that this identification provides the quantum numbers of colour
-    charges, not a full derivation of quarks as stable projected configurations.
-    The construction of quark-like fermionic sectors as admissible configurations
-    in $\mathrm{Im}\,\Pi$ carrying these quantum numbers is a separate programme
-    deferred to future work.
-
-  \subsection{Recursive non-injectivity and structural confinement}
-
-    The projection
-    $\Pi_{\mathrm{colour}} :
-    \{\text{coloured sectors } c_i\} \to
-    \{\text{colour-neutral pairs and triplets}\}$
-    maps three coloured degrees of freedom to one colour-neutral observable.
-    By the recursive non-injectivity theorem (ENI~\cite{Beau2026l},
-    Corollary~6), this projection must be non-injective whenever colour-neutral
-    objects arise as genuinely emergent from coloured sectors.
-    The non-injectivity entropy $S_{\Pi_{\mathrm{colour}}} > 0$ measures the
-    colour information erased by the projection.
-
-    This is the structural content of colour confinement: individual colour charges
-    are not directly observable because $\Pi_{\mathrm{colour}}$ is non-injective by
-    construction.
-    The present paper confirms that the three sectors $c_i$ of a valid triplet have
-    identical admissibility profiles --- they are structurally indistinguishable at
-    the level of $\sigma_{c_i}(n)$ --- which is precisely the condition under which
-    $\Pi_{\mathrm{colour}}$ produces a well-defined colour-neutral emergent object.
-
-    The tower of non-injective projections identified in ENI §5 takes the following
-    explicit form in the Cosmochrony framework:
-    \begin{equation}
-      \Omega_0
-      \;\xrightarrow{\Pi_1}\;
-      \{\text{sectors } c_i\}
-      \;\xrightarrow{\Pi_{\mathrm{colour}}}\;
-      \{\text{triplets}\}
-      \;\xrightarrow{\Pi_3}\;
-      \{\text{hadrons}\},
-      \label{eq:tower}
-    \end{equation}
-    where each arrow is non-injective by ENI Corollary~6.
-    The confirmation of $\Hcolor$ validates the co-admissibility structure
-    at the second level of the tower~\eqref{eq:tower}: the three sectors of a
-    triplet project to a single colour-neutral effective object, with the
-    $\mathrm{SU}(3)$ gauge structure arising as the symmetry group of the
-    projection's fibre.
-
-  \subsection{Comparison with conjugate-pair co-admissibility}
-
-    Conjugate pairs $\{c, q-c\}$ are unconditionally co-admissible
-    (O25, O26~\cite{Beau2026a28,Beau2026a30}): their pair-level variance
-    ratio is at the block-sampling noise floor.
-    The triplet variance ratio $R_{\mathrm{var}}$ being of the same order
-    (and its convergence to zero with $q$) places colour triplets in the
-    same universality class as conjugate pairs for co-admissibility.
-    This is consistent with the tower~\eqref{eq:tower}: conjugate pairs
-    correspond to the lepton level (colour-neutral, $\Pi_{\mathrm{colour}}$
-    is trivial), while colour triplets correspond to the baryon level
-    ($\Pi_{\mathrm{colour}}$ is non-trivial and is what O32 tests).
-
-  \subsection{Anomaly filter}
-
-    For control primes, a small number of conjugate pairs may exhibit
-    anomalously high $\dc$ (single-sample Monte Carlo artefacts, documented
-    in O29~\cite{Beau2026a33} for $q=101$).
-    The pipeline provides an optional anomaly filter
-    (\texttt{--filter-anomalous}) that excludes pairs with $\dc$ outside the
-    inter-quartile range $[\mathrm{median} - 2\,\mathrm{IQR},\
-  \mathrm{median} + 2\,\mathrm{IQR}]$.
-    In all runs reported here, the filter was not activated; both filtered
-    and unfiltered results are saved and will be compared in the extended
-    analysis.
-    The control reference $R_{\mathrm{var}}^{\mathrm{ctrl}} = 2.04 \times 10^{-3}$
-    was computed at $q=29$ (M=20), which has no known anomalous pairs.
-
-  \subsection{Open problems}
-
-    \begin{enumerate}
-      \item \textbf{Yang--Mills for $\mathrm{SU}(3)$:}
-      Establishing the effective gauge dynamics on the colour fibre,
-      analogous to Q6a~\cite{Beau2026m} for $\mathrm{SU}(2)$.
-      \item \textbf{Transfer chain $\dtri \to \alpha_s$:}
-      Deriving the strong coupling constant from the triplet capacity
-      exponent, analogous to $\delta_{\mathrm{pair}} \to \beta^* \to
-      m_e : m_\mu : m_\tau$~\cite{Beau2026a28}.
-      \item \textbf{Power-law exponent $\alpha$:}
-      The four-prime dataset $q\in\{61,151,211,307\}$ is complete;
-      non-monotone $R_{\mathrm{var}}$ behaviour precludes a clean power-law estimate.
-    \end{enumerate}
-
-    \clearpage
   \section{Conclusion}
   \label{sec:conclusion}
 
-  We have tested Hypothesis~$\Hcolor$ numerically on the standard Cayley
-  graph of $\Heis(\Zq)$ for $q \in \{61, 151, 211\}$,
-  using $M = 50$ independent blocks per character.
-  Three signatures of co-admissibility are confirmed:
-  \begin{enumerate}
-    \item The inter-triplet variance ratio $R_{\mathrm{var}}$ is at or below the
-    noise floor of the control pairs at all three primes
-    ($R = 0.90$ at $q=61$, $R = 0.19$ at $q=151$, $R = 0.42$ at $q=211$).
-    \item The triplet capacity exponent satisfies $\dtri \approx 3\dc$ at
-    the sub-percent level for $q \in \{151, 211\}$.
-    \item All colour covariance matrices $C_{\mathrm{color}}$ have
-    numerical rank~1.
-  \end{enumerate}
+  The O12 three-character capacity profile is exactly invariant under scaling of the whole block
+  by any unit of $\Zq$.
+  Under the version-1.5 sampling law, every character therefore carries the same distribution of
+  profiles, and the inter-triplet variance ratio, the slope relation and the covariance rank have
+  laws that do not depend on which characters are compared.
+  The version-1.5 campaign, reproduced exactly here, measured sampling dispersion, not colour
+  co-admissibility.
+  Its verdict and its physical interpretation are withdrawn; the diagnostic's limits, now proved,
+  are this record's result.
 
-  The numerical campaign supports the following refined conclusion.
-  Colour triplet co-admissibility is exact at the level of the algebraic rank
-  structure proved in O31~\cite{Beau2026a35}: the intra-coset Vandermonde
-  argument gives $r_c(n) = r_{\omega c}(n) = r_{\omega^2 c}(n)$ unconditionally.
-  For the concrete O12 fingerprint observable, the modulation frequency argument
-  (Proposition~\ref{prop:avg-hcolor}) establishes
-  \[
-    \mathbb{E}[\sigma_c(n)]
-    \;=\;
-    \mathbb{E}[\sigma_{\omega c}(n)] + O(q^{-1}),
-  \]
-  so that the effective capacity exponents satisfy
-  $\delta_c = \delta_{\omega c} = \delta_{\omega^2 c}$
-  in the $q \to \infty$ limit.
-  The $\mathrm{SU}(3)$ identification on the standard Cayley graph is therefore
-  analytically established: at the level of the effective exponents via
-  Proposition~\ref{prop:avg-hcolor}, and pointwise at finite $q$ via the
-  full-block orbit action (Remark~\ref{rmk:exact-coscale}, O31~\cite{Beau2026a35}).
-  The residual variance $R_{\mathrm{var}}$ measured here is the
-  independent-auxiliary sampling footprint, predicted to scale as
-  $R_{\mathrm{var}}(q) \propto q^{-1}$.
-
-  The finite-$q$ residual $R_{\mathrm{var}}$ is not an unexplained anomaly but
-  the expected modulation bias of the random-block fingerprint construction,
-  with a quantitative prediction~\eqref{eq:rvar-scaling} broadly confirmed:
-  all four test primes satisfy $R\leq 3$ (full dataset $q\in\{61,151,211,307\}$).
-  At $q = 307$, $R = 0.7$ ($R_{\mathrm{var}} = 1.17\times10^{-3}$),
-  confirming the prediction direction.
-
-  The three levels of the hypothesis are now:
-  $\Hcolor_{\mathrm{rank}}$ proved in O31~\cite{Beau2026a35};
-  $\Hcolor_{\mathrm{avg}}$ proved up to $O(q^{-1})$ in the present paper;
-  $\Hcolor_{\mathrm{eff}}$ (equality of exponents) proved in the $q \to \infty$ limit;
-  $\Hcolor_{\mathrm{pointwise}}$ (exact profile equality at finite $q$) proved under
-  the full-block orbit action in O31~\cite{Beau2026a35} via the single-frequency
-  structure of the fingerprint, with the independent-auxiliary residual measured here
-  consistent with all numerical results.
+  \paragraph{Code and data.}
+  The version-1.5 campaign code, the stored arrays and the frequency-counting profile are in the
+  \texttt{code/} directory, and the version-2.0 null-control and rebuild scripts with their outputs in
+  \texttt{code/v2/} (usage in \texttt{code/integration.md}), of the repository
+  \url{https://github.com/Cosmochrony/o32}.
 
   \clearpage
   \bibliographystyle{plain}

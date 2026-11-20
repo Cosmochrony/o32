@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you cite this work, please use the metadata from this file."
-title: "Colour Triplet Co-admissibility on ( ): Numerical Test of Hypothesis"
+title: "Limits of a Colour-Triplet Capacity Diagnostic on Heis_3(Z/qZ): Exact Unit-Scaling Invariance of the O12 Profile"
 type: software
 authors:
   - family-names: "Beau"
@@ -11,7 +11,7 @@ doi: "10.5281/zenodo.20145607"
 license: "CC-BY-4.0"
 preferred-citation:
   type: article
-  title: "Colour Triplet Co-admissibility on ( ): Numerical Test of Hypothesis"
+  title: "Limits of a Colour-Triplet Capacity Diagnostic on Heis_3(Z/qZ): Exact Unit-Scaling Invariance of the O12 Profile"
   authors:
     - family-names: "Beau"
       given-names: "Jérôme"

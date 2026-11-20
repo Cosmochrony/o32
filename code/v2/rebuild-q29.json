@@ -1,0 +1,173 @@
+{
+ "29": {
+  "is_test": false,
+  "omega": null,
+  "n_shells": 28,
+  "stored_profile_max_abs_diff": [
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity
+  ],
+  "profile_lengths": [
+   2,
+   9
+  ],
+  "conjugate_pairs": {
+   "groups": [
+    {
+     "group": [
+      1,
+      28
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      2,
+      27
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      3,
+      26
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      4,
+      25
+     ],
+     "usable": [],
+     "vr": null
+    }
+   ],
+   "mean_vr": null,
+   "n_valid": 0
+  },
+  "arbitrary_triples": {
+   "groups": [
+    {
+     "group": [
+      5,
+      21,
+      15
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      16,
+      25,
+      18
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      26,
+      21,
+      4
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      19,
+      28,
+      9
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      17,
+      3,
+      8
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      24,
+      10,
+      3
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      24,
+      26,
+      27
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      11,
+      19,
+      10
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      11,
+      18,
+      27
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      14,
+      3,
+      19
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      5,
+      27,
+      25
+     ],
+     "usable": [],
+     "vr": null
+    },
+    {
+     "group": [
+      13,
+      23,
+      19
+     ],
+     "usable": [],
+     "vr": null
+    }
+   ],
+   "mean_vr": null,
+   "n_valid": 0
+  }
+ }
+}
