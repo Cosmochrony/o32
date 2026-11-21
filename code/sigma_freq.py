@@ -1,6 +1,6 @@
 """
 sigma_freq.py
-Closed-form sigma via frequency counting -- a proof-grade simplification.
+Closed-form sigma via frequency counting (O32 2.0, Lemma 2: rank counts frequencies).
 
 Each O12 fingerprint vector is a single additive character:
     fp[x] = q^{-3/2} exp(2pi i (A + B x)/q),  B = c1 b1 + c2 b2 + c3 b3 (mod q),
@@ -11,8 +11,13 @@ the number of NEW distinct frequencies it contributes, and
     sigma_c(n) = |new distinct B at shell n| / |S_n|.
 No Gram-Schmidt, no SVD: O(|S_n|) per shell instead of O(|S_n| q^2).
 """
+import os
+import sys
 import numpy as np
-from spectral_O12 import heisenberg_mul_batch
+
+# heisenberg_mul_batch comes from the version-1.5 campaign module (unchanged code)
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "v1.5-legacy"))
+from spectral_O12 import heisenberg_mul_batch  # noqa: E402
 
 
 def compute_block_capacity_freq(shells, c_block, q, gens, n_max=None):

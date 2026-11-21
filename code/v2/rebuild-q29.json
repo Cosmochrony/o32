@@ -4,18 +4,28 @@
   "omega": null,
   "n_shells": 28,
   "stored_profile_max_abs_diff": [
-   Infinity,
-   Infinity,
-   Infinity,
-   Infinity,
-   Infinity,
-   Infinity,
-   Infinity,
-   Infinity
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
   ],
   "profile_lengths": [
    2,
    9
+  ],
+  "stored_controls_zero_padded_max_abs_diff": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
   ],
   "conjugate_pairs": {
    "groups": [

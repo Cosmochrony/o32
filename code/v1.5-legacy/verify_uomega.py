@@ -1,5 +1,14 @@
+"""
+STATUS (O32 version 2.0): this script reproduces the HISTORICAL version-1.5 analysis.
+Its interpretation is INVALIDATED by O32 2.0: no output of this script tests, confirms
+or supports [H-color]; verdict strings such as "PASSES", "confirmed" or "beta*" ranges
+are withdrawn. See README.md in this directory and Section 1 of the O32 2.0 paper.
+"""
+import sys
 import numpy as np
-from spectral_O12 import build_generators, bfs_shells_depth_capped, fingerprint_vectors_batch
+print("[O32 2.0 STATUS] Historical version-1.5 analysis; its [H-color] interpretation is invalidated (see README.md).", file=sys.stderr)
+from spectral_O12 import build_generators, fingerprint_vectors_batch
+from legacy_shim import bfs_shells_depth_capped
 from hcolor_exact_check import primitive_cube_root
 
 def perm_dilation(q, omega):

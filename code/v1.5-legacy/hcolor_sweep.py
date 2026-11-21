@@ -1,4 +1,9 @@
 """
+STATUS (O32 version 2.0): this script reproduces the HISTORICAL version-1.5 analysis.
+Its interpretation is INVALIDATED by O32 2.0: no output of this script tests, confirms
+or supports [H-color]; verdict strings such as "PASSES", "confirmed" or "beta*" ranges
+are withdrawn. See README.md in this directory and Section 1 of the O32 2.0 paper.
+
 hcolor_sweep.py
 Run the deterministic [H-color]_pointwise check across colour test primes
 (q == 1 mod 3) with a live progress/ETA bar per prime. Run it like any other
@@ -7,7 +12,9 @@ script (e.g. in PyCharm); hcolor_exact_check.py must be in the same directory.
   matching A (c1 scaled alone)     -> sigma differs   (expected, nonzero)
   matching B (whole block scaled)  -> sigma identical  (the [H-color] symmetry)
 """
+import sys
 import time
+print("[O32 2.0 STATUS] Historical version-1.5 analysis; its [H-color] interpretation is invalidated (see README.md).", file=sys.stderr)
 from hcolor_exact_check import run
 
 # Colour TEST primes only (q == 1 mod 3). 401 is a CONTROL prime (2 mod 3): skip.

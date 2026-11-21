@@ -1,4 +1,9 @@
 """
+STATUS (O32 version 2.0): this script reproduces the HISTORICAL version-1.5 analysis.
+Its interpretation is INVALIDATED by O32 2.0: no output of this script tests, confirms
+or supports [H-color]; verdict strings such as "PASSES", "confirmed" or "beta*" ranges
+are withdrawn. See README.md in this directory and Section 1 of the O32 2.0 paper.
+
 hcolor_exact_check.py
 Deterministic, Monte-Carlo-free test of [H-color]_pointwise on the standard
 Cayley graph of Heis_3(Z/qZ).
@@ -18,8 +23,8 @@ If max|sigma_i(n)-sigma_j(n)| == 0 to machine precision over all base blocks,
 [H-color]_pointwise holds for that matching; a nonzero value is a finite-q
 counterexample. No M, no averaging: each base block is an exact comparison.
 
-Uses compute_block_capacity_fast + bfs_shells_depth_capped from the unified
-spectral_O12.py.
+Uses compute_block_capacity_freq (../sigma_freq.py) and bfs_shells_depth_capped,
+both supplied by legacy_shim.py (the "unified spectral_O12.py" was never shipped).
 """
 import argparse
 import sys
@@ -29,8 +34,8 @@ try:
 except ImportError:
     def tqdm(it=None, **kw):
         return it if it is not None else iter(())
-from spectral_O12 import (build_generators, bfs_shells_depth_capped,
-                          compute_block_capacity_freq)
+from spectral_O12 import build_generators
+from legacy_shim import bfs_shells_depth_capped, compute_block_capacity_freq
 
 
 def primitive_cube_root(q):
@@ -131,6 +136,7 @@ def run(q, n0, n1, buffer=3, n_orbits=None, aux_pairs=None, seed=0, exhaustive=F
 
 
 if __name__ == '__main__':
+    print("[O32 2.0 STATUS] Historical version-1.5 analysis; its [H-color] interpretation is invalidated (see README.md).", file=sys.stderr)
     pa = argparse.ArgumentParser()
     pa.add_argument('--q', type=int, default=61)
     pa.add_argument('--n0', type=int, default=2)

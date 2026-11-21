@@ -19,7 +19,7 @@ exactly invariant under multiplication of the whole block $\mathbf c=(c_1,c_2,c_
 $\mathbb{Z}/q\mathbb{Z}$. Each fingerprint vector is a single Fourier character $e_B$ with
 $B=c_1b_1+c_2b_2+c_3b_3$, rank increments count distinct frequencies, and $\lambda$ permutes them.
 
-Under the sampling law of the campaign (auxiliary characters drawn uniformly), the profile attached to a character
+Under the sampling law of the campaign (auxiliary characters drawn independently and uniformly from the units, rejecting blocks with $c_1+c_2+c_3=0$), the profile attached to a character
 $c$ therefore has the same distribution for every $c\neq0$. The expected profiles are equal for all characters,
 exactly, with no $O(q^{-1})$ term and no role for cube roots of unity. The inter-triplet variance ratio
 $R_{\mathrm{var}}$, the triplet exponent $\delta_{\mathrm{tri}}$ and the covariance $C_{\mathrm{color}}$ thus have
@@ -27,8 +27,8 @@ laws that do not depend on which characters are compared: colour triplets, conju
 are indistinguishable, as null controls at $q=61$ and $q=151$ confirm. The relation
 $\delta_{\mathrm{tri}}\approx3\delta_c$ is an identity of least-squares fitting.
 
-The stored version-1.5 campaign is reproduced exactly. Its calibration mixed two averaging conventions and three
-noise floors; rebuilt on shells unaffected by rank saturation, it gives comparable ratios for all three kinds of
+The stored version-1.5 campaign is reproduced exactly. Its calibration mixed two averaging conventions, and its three
+noise floors correspond to three conventions (zero-padded, truncated, and an unstored $M=20$ run); rebuilt on shells unaffected by rank saturation, it gives comparable ratios for all three kinds of
 character sets.
 
 ## Results
@@ -47,12 +47,24 @@ character sets.
 
 - The claim that the campaign tests, confirms or supports $[\mathrm{H\text{-}color}]$, and the "passes" verdict.
 - Proposition 1 ($O(q^{-1})$ averaged co-admissibility) and the prediction $R_{\mathrm{var}}\propto q^{-1}$.
-- The pointwise and rank levels attributed to O31 (now a withdrawal notice), and the claim that the
-  $\mathrm{SU}(3)$ identification is analytically established.
+- The reading of the pointwise, averaged and effective equalities as levels of $[\mathrm{H\text{-}color}]$, the
+  rank level, their attribution to O31 (now a withdrawal notice), and the claim that the $\mathrm{SU}(3)$
+  identification is analytically established.
 - The additive-structure reading of $\delta_{\mathrm{tri}}\approx3\delta_c$ and the evidential weight of the rank
   of $C_{\mathrm{color}}$.
 - The colour-charge, quark, baryon, confinement and projection-tower readings, and the $\beta^*$ transfer chain.
 - The noise floors $3.81$, $1.657$ and $2.04\times10^{-3}$ and the ratios $R$ derived from them.
+
+## What survives, and with which hypotheses
+
+- **Exact, per block, no sampling hypothesis:** invariance under multiplication of the whole block by any unit.
+  The pointwise equality across a colour orbit, $\sigma_{\mathbf c}=\sigma_{\omega\mathbf c}$, is the special
+  case $\lambda=\omega$; it carries no colour content.
+- **In law, under the campaign sampling law and independent draws:** equal distributions, hence equal expected
+  profiles, for every pair of characters; the fitted exponent has the same law for every character, so any
+  common limit is not specific to colour orbits. Individual mean profiles still differ by sampling noise.
+- **No discriminating power:** no statistic of these profiles can separate colour triplets from other sets of
+  characters.
 
 ## Status
 
@@ -61,9 +73,11 @@ colour orbit would need an observable that is not invariant under all units.
 
 ## Code
 
-`code/` holds the version-1.5 campaign (`o32_triplet_pipeline.py`, `spectral_O12.py`, stored arrays), the
-frequency-counting profile (`sigma_freq.py`), and the version-2.0 null-control and rebuild scripts with their
-outputs.
+- **Version 2.0 (reproducible path):** `code/sigma_freq.py` and `code/v2/` (null controls, rebuild, table), with
+  their JSON outputs and logs; usage and dependencies in `code/integration.md`.
+- **Version 1.5 (historical):** `code/v1.5-legacy/` (campaign pipeline, `spectral_O12.py`, stored arrays,
+  exact-check scripts). These reproduce an analysis whose interpretation version 2.0 invalidates; see the status
+  note `code/v1.5-legacy/README.md`.
 
 ## DOI
 

@@ -1,4 +1,9 @@
 """
+STATUS (O32 version 2.0): this script reproduces the HISTORICAL version-1.5 analysis.
+Its interpretation is INVALIDATED by O32 2.0: no output of this script tests, confirms
+or supports [H-color]; verdict strings such as "PASSES", "confirmed" or "beta*" ranges
+are withdrawn. See README.md in this directory and Section 1 of the O32 2.0 paper.
+
 o32_triplet_pipeline.py  —  O32 Spectral Admissibility Sub-programme
 Numerical test of Hypothesis [H-color]: triplet co-admissibility on Heis_3(Z/qZ).
 
@@ -644,4 +649,5 @@ def main():
         print("No results to save.")
 
 if __name__ == "__main__":
+    print("[O32 2.0 STATUS] Historical version-1.5 analysis; its [H-color] interpretation is invalidated (see README.md).", file=sys.stderr)
     main()

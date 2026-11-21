@@ -1,0 +1,7 @@
+/Users/javarome/project/@cosmochrony/o32-recon-2026-11-19/o32_null_test.py:62: RuntimeWarning: invalid value encountered in divide
+  vr = np.var(stk, 0) / np.mean(stk**2, 0)
+q=151 shells=59  T3 freq-vs-GS max|diff| over 3 blocks = 0.000e+00
+T1 full-block scaling by 30 random non-cube-root units: max|diff| = 0.000e+00
+T2 M=50 window=[3,13]
+   colour triplets [(1, 32, 118), (2, 64, 85), (3, 96, 52), (4, 128, 19)]: R_var = ['6.12e-03', '2.27e-03', '2.72e-03', '3.83e-03']  mean 3.74e-03
+   20 arbitrary triples: R_var mean 3.51e-03  median 2.66e-03  min 1.28e-03  max 7.39e-03

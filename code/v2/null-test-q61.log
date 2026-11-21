@@ -1,0 +1,5 @@
+q=61 shells=58  T3 freq-vs-GS max|diff| over 3 blocks = 0.000e+00
+T1 full-block scaling by 30 random non-cube-root units: max|diff| = 0.000e+00
+T2 M=50 window=[2,8]
+   colour triplets [(1, 13, 47), (2, 26, 33), (3, 39, 19), (4, 52, 5)]: R_var = ['1.12e-02', '1.29e-02', '5.21e-03', '2.17e-02']  mean 1.28e-02
+   20 arbitrary triples: R_var mean 1.32e-02  median 9.07e-03  min 3.64e-03  max 3.57e-02

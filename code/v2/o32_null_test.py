@@ -4,11 +4,12 @@ T1  pointwise: sigma(lambda*block) == sigma(block) for arbitrary units lambda (n
 T2  protocol:  R_var for O32 colour triplets vs. arbitrary non-orbit triples, same M, same sampling.
 T3  GS check:  frequency-counting sigma == Gram-Schmidt sigma on a few blocks.
 """
-import sys, argparse
+import os, sys, argparse
 import numpy as np
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--code", required=True)
+ap.add_argument("--code", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                help="the O32 code/ directory (default: parent of this script)")
 ap.add_argument("--q", type=int, default=61)
 ap.add_argument("--bfs-frac", type=float, default=0.99)
 ap.add_argument("--n0", type=int, default=2)
@@ -17,7 +18,8 @@ ap.add_argument("--M", type=int, default=50)
 ap.add_argument("--reps", type=int, default=20)
 ap.add_argument("--seed", type=int, default=20261119)
 a = ap.parse_args()
-sys.path.insert(0, a.code)
+LEGACY = os.path.join(a.code, "v1.5-legacy")   # campaign sampler, BFS and stored arrays
+sys.path[:0] = [a.code, LEGACY]                 # sigma_freq.py, then the v1.5 modules
 import spectral_O12 as S
 from sigma_freq import compute_block_capacity_freq as _freq
 from o32_triplet_pipeline import primitive_cube_root, find_colour_triplets, sample_block

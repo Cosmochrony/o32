@@ -2,7 +2,8 @@
 
 1. Reproduces each character's M-block mean profile with the O32 per-character seeds
    (base_seed + cidx*997 + c*7, characters = list(set(groups))) using the exact
-   frequency-counting sigma, and compares it with code/results_o32*.npz.
+   frequency-counting sigma, and compares it with the stored arrays in code/v1.5-legacy/:
+   results_o32.npz (truncated means) and results_o32_controls.npz (zero-padded control means).
 2. Keeps per-block profiles and cumulative ranks, and defines the usable shells of a
    group as the shells n >= 1 at which no block of any member has reached rank q
    (so no shell is truncated by saturation or zero-padded).
@@ -11,11 +12,12 @@
    variance so groups of 2 and 3 are comparable, for: colour triplets (test primes),
    conjugate pairs (all primes), and arbitrary triples (all primes, null).
 """
-import sys, json, argparse
+import os, sys, json, argparse
 import numpy as np
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--code", required=True)
+ap.add_argument("--code", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                help="the O32 code/ directory (default: parent of this script)")
 ap.add_argument("--primes", type=int, nargs="+", default=[29, 61, 101, 151, 211, 307])
 ap.add_argument("--M", type=int, default=50)
 ap.add_argument("--seed", type=int, default=42)
@@ -23,7 +25,8 @@ ap.add_argument("--n-null", type=int, default=12)
 ap.add_argument("--null-seed", type=int, default=20261119)
 ap.add_argument("--out", required=True)
 a = ap.parse_args()
-sys.path.insert(0, a.code)
+LEGACY = os.path.join(a.code, "v1.5-legacy")   # campaign sampler, BFS and stored arrays
+sys.path[:0] = [a.code, LEGACY]                 # sigma_freq.py, then the v1.5 modules
 import spectral_O12 as S
 from sigma_freq import compute_block_capacity_freq as freq
 import o32_triplet_pipeline as P
@@ -52,12 +55,16 @@ def vr_on(members, means, idx):
     stk = np.stack([means[c][idx] for c in members])
     return float(np.mean(np.var(stk, 0, ddof=1) / np.mean(stk ** 2, 0)))
 
-old = {}
-for f in ("results_o32.npz", "results_o32_controls.npz"):
+def load_npz(name):
     try:
-        old.update(dict(np.load(f"{a.code}/{f}", allow_pickle=True)))
+        return dict(np.load(os.path.join(LEGACY, name), allow_pickle=True))
     except FileNotFoundError:
-        pass
+        return {}
+
+# results_o32.npz: means truncated to the shortest block profile (all six primes);
+# results_o32_controls.npz: zero-padded means of the control primes (q = 29, 101).
+old_trunc = load_npz("results_o32.npz")
+old_pad = load_npz("results_o32_controls.npz")
 
 report = {}
 for q in a.primes:
@@ -71,15 +78,20 @@ for q in a.primes:
     n_max = P.N_MAX_BLK.get(q, 60)
     data = {c: char_blocks(c, q, shells, gens, n_max, a.M, a.seed, i) for i, c in enumerate(chars)}
     # reproduction check against the stored campaign
-    mism = []
+    def cmp(m, o):
+        o = np.asarray(o, float)
+        return float(np.max(np.abs(m - o))) if len(m) == len(o) else float("inf")
+    mism, mism_pad = [], []
     for c in chars:
         k = f"q{q}_sm_c{c}"
-        if k in old:
-            # the stored campaign truncated each character's mean to its shortest block profile
+        if k in old_trunc:
+            # truncated convention: mean over blocks, cut to the shortest block profile
             Lmin = min(len(x) for x in data[c][0])
-            m = np.mean([x[:Lmin] for x in data[c][0]], 0)
-            o = np.asarray(old[k], float)
-            mism.append(float(np.max(np.abs(m - o))) if len(m) == len(o) else float("inf"))
+            mism.append(cmp(np.mean([x[:Lmin] for x in data[c][0]], 0), old_trunc[k]))
+        if k in old_pad:
+            # zero-padded convention: blocks padded with zeros to the longest profile
+            Lmax = max(len(x) for x in data[c][0])
+            mism_pad.append(cmp(pad(data[c][0], Lmax).mean(0), old_pad[k]))
     # extra groups: conjugate pairs and arbitrary triples (fresh seeds; null controls)
     extra_pairs = [] if not is_test else P.find_conjugate_pairs(q, 4)
     nulls = []
@@ -106,6 +118,8 @@ for q in a.primes:
                stored_profile_max_abs_diff=mism,
                profile_lengths=[min(len(x) for c in chars for x in data[c][0]),
                                 max(len(x) for c in chars for x in data[c][0])])
+    if mism_pad:
+        rep["stored_controls_zero_padded_max_abs_diff"] = mism_pad
     if is_test:
         rep["colour_triplets"] = summarise(groups)
         rep["conjugate_pairs"] = summarise(extra_pairs)
@@ -114,7 +128,9 @@ for q in a.primes:
     rep["arbitrary_triples"] = summarise(nulls)
     report[q] = rep
     def fmt(x): return "n/a" if x is None else f"{x:.2e}"
-    line = f"q={q:4d} shells={len(shells):3d} profile len {rep['profile_lengths']} repro max|d|={max(mism) if mism else 'n/a'}"
+    line = f"q={q:4d} shells={len(shells):3d} profile len {rep['profile_lengths']} repro max|d| truncated={max(mism) if mism else 'n/a'}"
+    if mism_pad:
+        line += f" zero-padded={max(mism_pad)}"
     for k in ("colour_triplets", "conjugate_pairs", "arbitrary_triples"):
         if k in rep:
             us = [len(g["usable"]) for g in rep[k]["groups"]]

@@ -3,6 +3,12 @@
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{booktabs}
 \usepackage{hyperref}
+\hypersetup{
+  pdftitle={Limits of a Colour-Triplet Capacity Diagnostic on Heis3(Z/qZ): Exact Unit-Scaling Invariance of the O12 Profile},
+  pdfauthor={J\'er\^ome Beau},
+  pdfsubject={O32, version 2.0},
+  pdfkeywords={Heisenberg group, Weil representation, BFS capacity, null control, unit scaling}
+}
 \usepackage{doi}
 \usepackage{microtype}
 \usepackage[margin=2.5cm]{geometry}
@@ -58,7 +64,11 @@ Independent Researcher, Paris, France\\
     rank-one covariance reflects identically distributed profiles.
     The stored campaign is reproduced exactly; rebuilt on shells unaffected by rank saturation,
     the calibration gives comparable ratios for all three kinds of character sets.
-    Version~1.5's Proposition~1, the pointwise and rank levels imported from O31, and the
+    The equalities that version~1.5 read as colour levels survive only as special cases without
+    colour content: the pointwise equality across a colour orbit is the case $\lambda=\omega$ of the
+    invariance, and the averaged and effective equalities hold in law, under the campaign sampling
+    law, for every pair of characters.
+    Their reading as levels of~$\Hcolor$, version~1.5's Proposition~1, the attribution to O31, and the
     $\mathrm{SU}(3)$, quark, baryon, confinement and $\beta^{*}$ readings are withdrawn.
     Hypothesis~$\Hcolor$ is neither confirmed nor refuted: it is not testable with this observable.
   \end{abstract}
@@ -74,7 +84,7 @@ Independent Researcher, Paris, France\\
   \section{Status of this version}
   \label{sec:status}
 
-  Version~1.5 of this record~\cite{Beau2026a36} reported a numerical campaign on
+  Version~1.5 of this record~\cite{Beau2026a36v15} reported a numerical campaign on
   $\Heis(\Zq)$ for $q\in\{61,151,211,307\}$, with controls $q\in\{29,101\}$, and presented
   it as a test of hypothesis~$\Hcolor$ (colour-triplet co-admissibility) in the sense of
   O31~\cite{Beau2026a35}.
@@ -90,10 +100,21 @@ Independent Researcher, Paris, France\\
     verdict ``$\Hcolor$ passes'' attached to the criterion $R\leq3$.
     \item Proposition~1 of version~1.5 (averaged colour co-admissibility up to $O(q^{-1})$) and
     the prediction $\Rvar\propto q^{-1}$.
-    The exact statement is Corollary~\ref{cor:law} below; it holds for every unit, carries no
-    colour content, and has no correction term.
-    \item The pointwise and rank levels of~$\Hcolor$ attributed to O31, and every statement that
-    the $\mathrm{SU}(3)$ identification on the standard Cayley graph is analytically established.
+    The exact statement is Corollary~\ref{cor:law} below: equality in law, hence of mean profiles,
+    for every pair of characters under the sampling law~$\mathcal L$, with no correction term and no
+    colour content.
+    \item The reading of three equalities as levels of~$\Hcolor$.
+    The \emph{pointwise} equality $\sigma_{\mathbf c}=\sigma_{\omega\mathbf c}$ across a colour orbit is
+    proved here, for each block, as the case $\lambda=\omega$ of Theorem~\ref{thm:invariance}.
+    The \emph{averaged} equality of expected profiles holds exactly by Corollary~\ref{cor:law}.
+    The \emph{effective} level asked for equal decay exponents in the $q\to\infty$ limit; by
+    Corollary~\ref{cor:law} the exponent fitted to a mean profile has the same law for every
+    character at every~$q$, so whatever limit it has is common to all characters.
+    The first statement holds for every unit, the other two for every pair of characters under the
+    sampling law~$\mathcal L$, so none of them is a colour level.
+    Withdrawn are their reading as levels of~$\Hcolor$, the rank level, their attribution to O31,
+    and every statement that the $\mathrm{SU}(3)$ identification on the standard Cayley graph is
+    analytically established.
     \item The additive-structure reading of $\dtri\approx3\delta_c$ as a prediction confirmed by
     the data (Proposition~\ref{prop:ols}).
     \item The evidential weight given to the numerical rank of $\Ccol$ (Remark~\ref{rmk:ccol}).
@@ -137,7 +158,7 @@ Independent Researcher, Paris, France\\
       \label{eq:schrodinger}
     \end{equation}
     A \emph{block} is a triple $\mathbf c=(c_1,c_2,c_3)\in(\Zqs)^3$ with total
-    $c=c_1+c_2+c_3\neq0$.
+    $\kappa=c_1+c_2+c_3\neq0$.
     For a shell element $g$ and generators $s_1,s_2,s_3\in S_q$, put $g_1=gs_1$,
     $g_2=gs_1s_2$, $g_3=gs_1s_2s_3$, and let $u_0=q^{-1/2}(1,\dots,1)$.
     The O12 fingerprint vector is
@@ -165,8 +186,8 @@ Independent Researcher, Paris, France\\
     $\sigma_{\mathbf c}$ with $\mathbf c\sim\mathcal L_{c_1}$, each character using its own
     random stream.
     A \emph{colour triplet} in version~1.5 is an orbit $(c,\omega c,\omega^2c)$ with $\omega$ a
-    primitive cube root of unity, $q\equiv1\pmod3$, and no two members conjugate
-    ($c_i\neq-c_j$); its members sum to zero because $1+\omega+\omega^2=0$.
+    primitive cube root of unity and $q\equiv1\pmod3$; no two members are conjugate, since
+    $\omega^k\neq-1$, and the members sum to zero because $1+\omega+\omega^2=0$.
     The version-1.5 abstract used a different definition (sum zero plus non-conjugacy); the
     campaign used the orbit definition.
 
@@ -204,12 +225,14 @@ Independent Researcher, Paris, France\\
 
   \begin{remark}[Closed form]
     \label{rmk:closed}
-    O33~\cite[Theorem~1]{Beau2026a37} gives
-    $K_n(\mathbf c)=c[-(n+1),n+1]+\{0,\pm(c_2+c_3)\}+\{0,\pm c_3\}$ in $\Zq$, at every depth at
-    which the BFS ball $B_n$ is complete.
+    O33~\cite[Theorem~3.1]{Beau2026a37} gives
+    $K_n(\mathbf c)=\kappa[-(n+1),n+1]+\{0,\pm(c_2+c_3)\}+\{0,\pm c_3\}$ in $\Zq$ for every $n\geq0$.
+    The campaign code truncates the BFS by a node fraction, so here the formula applies at the depths
+    at which the computed ball $B_n$ is complete.
     Only the second Heisenberg coordinate enters $K_n$; the group enters $\sigma$ through the
     shell sizes $|S_n|$ alone.
-    The profile depends on the block only through $\bigl((c_2+c_3)/c,\;c_3/c\bigr)$.
+    By Theorem~\ref{thm:invariance}, the profile depends on the block only through
+    $\bigl((c_2+c_3)/\kappa,\;c_3/\kappa\bigr)$.
   \end{remark}
 
   \begin{theorem}[Unit-scaling invariance]
@@ -229,9 +252,14 @@ Independent Researcher, Paris, France\\
     shell sizes do not depend on the block.
   \end{proof}
 
-  The invariance holds for every unit.
-  The case $\lambda=\omega$ is the version-1.5 colour orbit, the case $\lambda=-1$ the
-  conjugate pair $\{c,q-c\}$; neither is distinguished from any other unit.
+  The invariance holds for every unit and for each block separately, without any sampling
+  hypothesis.
+  The case $\lambda=\omega$ is the version-1.5 colour orbit: the pointwise equality
+  $\sigma_{\mathbf c}=\sigma_{\omega\mathbf c}=\sigma_{\omega^2\mathbf c}$ that version~1.5 called
+  $\Hcolor_{\mathrm{pointwise}}$ is therefore proved, but it is not specific to cube roots of unity
+  and carries no colour content.
+  The case $\lambda=-1$ is the conjugate pair $\{c,q-c\}$; neither case is distinguished from any
+  other unit.
   Multiplying the first character alone is not a symmetry: matched blocks
   $(c,c_2,c_3)$ and $(\omega c,c_2,c_3)$ have different profiles in general.
 
@@ -267,11 +295,16 @@ Independent Researcher, Paris, France\\
     applied to each mean of $M$ independent profiles.
   \end{proof}
 
-  Corollary~\ref{cor:observables} is the reason the version-1.5 criterion always passed:
-  $\Rvar$ measures the finite-$M$ sampling dispersion of identically distributed means.
-  It cannot fail for colour triplets more often than for any other choice of characters.
-  The corresponding pseudo-random streams are independent in the statistical sense used by the
-  campaign; the null controls of Section~\ref{sec:numerics} check the consequence directly.
+  Corollaries~\ref{cor:law} and~\ref{cor:observables} are statements in law: they require the
+  sampling law $\mathcal L$ and independent draws, and they do not say that two individual mean
+  profiles coincide.
+  Within one prime, $\Rvar$ measures the finite-$M$ sampling dispersion of identically distributed
+  means, so it cannot fail for colour triplets more often than for any other choice of characters:
+  the version-1.5 criterion could not discriminate.
+  The numerical values of its ratios $R$ depended in addition on which reference value, among three
+  computed under different conventions, was used for the control primes (Section~\ref{sec:calibration}).
+  The pseudo-random streams are independent in the statistical sense used by the campaign; the
+  null controls of Section~\ref{sec:numerics} check the consequence directly.
 
   \begin{proposition}[Slope additivity is an identity]
     \label{prop:ols}
@@ -296,8 +329,12 @@ Independent Researcher, Paris, France\\
     \label{rmk:ccol}
     $\Ccol$ is the $3\times3$ covariance, over shells, of three identically distributed mean
     profiles $\bar\sigma_{c_i}(n)=\mu(n)+\varepsilon_i(n)$, with $\mu$ the common expectation.
-    Its leading eigenvalue is the variance of the decaying function $\mu$ over the window, and the
-    other two are of the order of the sampling noise.
+    Up to sampling noise it is $\operatorname{Var}_n(\mu)\,J$, with $J$ the all-ones matrix, so its
+    leading eigenvalue is about $3\operatorname{Var}_n(\mu)$, the variance of the decaying function
+    $\mu$ over the window counted for the three profiles, and the other two are of the order of the
+    sampling noise.
+    Moreover, a covariance over $k$ shells has rank at most $k-1$: at $q=61$ the only finite
+    $\Ccol$ of version~1.5 came from two shells, so its rank one was forced.
     Numerical rank one is therefore expected for every triple of characters, and the matrix carries
     no representation-theoretic content: no space $\tilde V_{\mathrm{color}}$ is constructed on
     which it would act.
@@ -306,23 +343,32 @@ Independent Researcher, Paris, France\\
   \section{Exact checks and null controls}
   \label{sec:numerics}
 
-  All checks use the version-1.5 code in \texttt{code/} and the null-control and rebuild scripts
-  added in this version in \texttt{code/v2/}.
-  The frequency-counting profile \texttt{sigma\_freq.py} implements Lemma~\ref{lem:count}.
+  All checks use the version-2.0 scripts in \texttt{code/v2/} and the frequency-counting profile
+  \texttt{code/sigma\_freq.py}, which implements Lemma~\ref{lem:count}; they import the campaign's
+  sampler, BFS and stored arrays, unchanged, from \texttt{code/v1.5-legacy/}.
 
   \begin{itemize}
     \item[(E1)] \emph{Frequency counting versus Gram--Schmidt.}
-    On three random blocks at each of $q=61$ and $q=151$ the two profiles agree exactly (maximum
-    difference~$0$); the same agreement underlies the exact reproduction of
-    Section~\ref{sec:calibration}, which used frequency counting throughout.
+    On three random blocks at each of $q=61$ and $q=151$ the two profiles agree exactly over their
+    common length (maximum difference~$0$); the exact reproduction of
+    Section~\ref{sec:calibration}, which used frequency counting throughout, confirms the agreement
+    on the full stored profiles.
     \item[(E2)] \emph{Unit scaling.}
-    For thirty random blocks and thirty random units $\lambda$ that are not cube roots of unity,
-    $\sigma_{\lambda\mathbf c}=\sigma_{\mathbf c}$ at every shell, at $q=61$ and $q=151$ (maximum
-    difference~$0$).
+    For thirty pairs $(\mathbf c,\lambda)$ of a random block and a random unit $\lambda\neq1$,
+    $\sigma_{\lambda\mathbf c}=\sigma_{\mathbf c}$ at every shell, profile lengths included, at $q=61$
+    and $q=151$ (maximum difference~$0$).
+    Cube roots of unity are excluded from the draw only to show that the invariance is not specific
+    to them; Theorem~\ref{thm:invariance} covers them.
     \item[(E3)] \emph{Null control.}
-    With the campaign protocol ($M=50$, version-1.5 windows), the four version-1.5 colour triplets
-    and twenty arbitrary triples containing no cube-root orbit give the window-averaged ratios
-    below, in units of $10^{-3}$ (the version-1.5 normalisation, population variance).
+    With a protocol modelled on the campaign ($M=50$, version-1.5 windows), the four version-1.5
+    colour triplets and twenty arbitrary triples containing no cube-root orbit give the
+    window-averaged ratios below, in units of $10^{-3}$ (the version-1.5 normalisation, population
+    variance).
+    The protocol differs from the campaign in four respects: every mean is zero-padded, $\Rvar$ is
+    averaged over the whole window, all characters share one random stream, and the BFS runs to all
+    shells.
+    The values are therefore not those of version~1.5 (whose $q=61$ value was the single shell
+    $n=2$), but the comparison between kinds of character sets is made under one protocol.
   \end{itemize}
 
   \begin{center}
@@ -336,8 +382,8 @@ Independent Researcher, Paris, France\\
     \end{tabular}
   \end{center}
 
-  The colour-triplet values lie inside the range of the arbitrary triples at both primes, as
-  Corollary~\ref{cor:observables} requires.
+  Each of the four colour-triplet values lies inside the range of the arbitrary triples at both
+  primes, as Corollary~\ref{cor:observables} requires.
   These window averages include shells at which some blocks have saturated; Section~\ref{sec:calibration}
   repeats the comparison on usable shells.
 
@@ -347,23 +393,36 @@ Independent Researcher, Paris, France\\
   \subsection{Reproduction of the stored campaign}
 
     The stored arrays \texttt{results\_o32.npz} and \texttt{results\_o32\_controls.npz} are
-    reproduced exactly (maximum difference~$0$) with $M=50$, seed~$42$ and the per-character
-    streams of \texttt{o32\_triplet\_pipeline.py}.
-    Two conventions coexist in them.
-    The test-prime means are truncated to the shortest of the $M$ block profiles, whereas the
-    control means are zero-padded to the longest.
-    The version-1.5 ratio $R$ compared quantities computed under the two conventions.
-    Version~1.5 also stated three different noise floors ($3.81$, $1.657$ and
-    $2.04\times10^{-3}$); the first two depend on which primes were summarised together, and the
-    third matches no stored run.
+    reproduced exactly (maximum difference~$0$ for every stored mean) with $M=50$, seed~$42$ and the
+    per-character streams of \texttt{o32\_triplet\_pipeline.py} (seed $42+997\,i+7c$ for the $i$-th
+    character~$c$).
+    Two averaging conventions coexist in them.
+    \texttt{results\_o32.npz} holds, for all six primes, means truncated to the shortest of the $M$
+    block profiles; \texttt{results\_o32\_controls.npz} holds, for $q\in\{29,101\}$, means
+    zero-padded to the longest.
+    Both are reproduced exactly.
+    The shipped pipeline zero-pads; the truncated means were produced by an earlier revision of it.
+
+    Version~1.5 stated three different noise floors.
+    Recomputed with its own summary logic (mean pair-variance ratio over the control primes), they
+    correspond to three conventions:
+    $3.81\times10^{-3}$ is $q\in\{29,101\}$ with zero-padded means;
+    $1.657\times10^{-3}$ is the same two primes with truncated means;
+    $2.04\times10^{-3}$ is $q=29$ alone with $M=20$ and truncated means, a run that version~1.5
+    describes but did not store.
+    The ratios $R$ of the version-1.5 results table used $1.657\times10^{-3}$ and so compared
+    truncated with truncated means; the ratio quoted in its abstract used $3.81\times10^{-3}$ and so
+    compared truncated test means with zero-padded control means.
     The parameter table gave $M=20$ for $q=29$; the stored control used $M=50$.
 
   \subsection{Usable shells}
 
     A shell $n\geq1$ is \emph{usable} for a set of characters if no block contributing to any of
-    their profiles has reached rank $q$ by shell $n$.
+    their profiles has reached rank $q$ by shell $n$, and no such profile has ended before shell~$n$
+    (a profile ends at rank $q$, at the depth cap or at the end of the computed BFS).
     On usable shells no increment is truncated by saturation and no mean includes padding.
-    Usable shells are few at small primes: none at $q=29$, where every block reaches rank $q$ at $n=1$, one
+    Usable shells are few at small primes: none at $q=29$, where every character has at least one
+    block that reaches rank $q$ at $n=1$ (149 of the 400 stored blocks do), one
     or two at $q=61$, four at $q=101$, six to eight at $q=151$, ten to twelve at $q=211$ and fifteen to
     nineteen at $q=307$ (Table~\ref{tab:rebuilt}).
     The windows of the stored version-1.5 runs ($[2,3]$ for $q=29$, although the paper's table gave $[2,5]$;
@@ -383,8 +442,10 @@ Independent Researcher, Paris, France\\
     Colour triplets are the four version-1.5 triplets; conjugate pairs are the four smallest pairs
     $\{c,q-c\}$; arbitrary triples are twelve random triples containing no cube-root orbit, drawn with seed
     $20261119+q$.
-    At test primes the pairs and triples use fresh streams, so their values depend on the seed; at control
-    primes the pairs are the version-1.5 control characters.
+    Characters already present in the campaign reuse their campaign streams (so a conjugate pair and a colour
+    triplet sharing a character share its mean profile); characters new to the comparison use fresh streams,
+    so the corresponding values depend on the seed.
+    At control primes the pairs are the version-1.5 control characters.
 
     \begin{table}[h]
       \centering
@@ -443,10 +504,12 @@ Independent Researcher, Paris, France\\
   are this record's result.
 
   \paragraph{Code and data.}
-  The version-1.5 campaign code, the stored arrays and the frequency-counting profile are in the
-  \texttt{code/} directory, and the version-2.0 null-control and rebuild scripts with their outputs in
-  \texttt{code/v2/} (usage in \texttt{code/integration.md}), of the repository
-  \url{https://github.com/Cosmochrony/o32}.
+  In the repository \url{https://github.com/Cosmochrony/o32}, the reproducible path of this version is
+  \texttt{code/sigma\_freq.py} and \texttt{code/v2/}, with the outputs and logs it produced (usage and
+  dependencies in \texttt{code/integration.md}).
+  The version-1.5 campaign code and stored arrays are in \texttt{code/v1.5-legacy/}, with a status note:
+  they reproduce a historical analysis whose interpretation this version invalidates, and the verdict
+  strings they print are withdrawn.
 
   \clearpage
   \bibliographystyle{plain}
