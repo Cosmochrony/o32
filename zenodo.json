@@ -4,5 +4,6 @@
   "main_tex": "tex/SpectralO32.tex",
   "publication_type": "workingpaper",
   "zenodo_id": 20145607,
-  "doi": "10.5281/zenodo.20145607"
+  "doi": "10.5281/zenodo.20145607",
+  "notes": "Version 2.0.1. Bibliography only: prints the new title of O6 (Matrix-Level Dynamic Redundancy and a Conditional Upper Bound on the Cascade Exponent β) and, where cited, of O5 (Finite Character-Trace Saturation and the Limits of Vertex-Based Class-Function Cascades). No result is changed."
 }
