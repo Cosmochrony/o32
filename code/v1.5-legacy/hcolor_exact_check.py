@@ -8,6 +8,7 @@ hcolor_exact_check.py
 Deterministic, Monte-Carlo-free test of [H-color]_pointwise on the standard
 Cayley graph of Heis_3(Z/qZ).
 
+[Historical text: O31 is now a withdrawal notice; the attribution below is withdrawn.]
 O31 (Prop. 4.19) proves the BFS sector RANK equality r_c(n)=r_wc(n)=r_w2c(n)
 exactly. The open question (O32 open problem 3) is whether the O12 Born-Infeld
 FINGERPRINT observable sigma_c(n) inherits that equality at finite q, or only up
