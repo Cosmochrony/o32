@@ -34,7 +34,8 @@ character sets.
 ## Results
 
 - **Theorem (unit-scaling invariance).** $\sigma_{\lambda\mathbf c}(n)=\sigma_{\mathbf c}(n)$ for every
-  $\lambda\in(\mathbb{Z}/q\mathbb{Z})^*$ and every shell $n$.
+  $\lambda\in(\mathbb{Z}/q\mathbb{Z})^*$ and every shell $n$. The invariance is already stated in O12's exact rank formula; this
+  record proves it from the single-frequency structure and draws its consequence for the campaign observables.
 - **Corollary (character-independent law).** Under the campaign's sampling law, $\sigma$ has the same distribution
   for every first character; it replaces version 1.5's Proposition 1.
 - **Corollary (non-discrimination).** No statistic of the campaign's mean profiles separates colour triplets from
